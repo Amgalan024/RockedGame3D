@@ -13,7 +13,8 @@ public class RocketGun : MonoBehaviour,IGameObjectComponent<Rocket>, IRocket
     public void InitializeComponent(Rocket rocket)
     {
         this.Rocket = rocket;
-        projectilePrefabPool = new Pool<RocketProjectileMovement>(projectilePrefab, 5, transform);
+        int poolCount = 10;
+        projectilePrefabPool = new Pool<RocketProjectileMovement>(projectilePrefab, poolCount, transform);
         projectilePrefabPool.AutoExpand = true;
         foreach (var projectile in projectilePrefabPool.PrefabsPool)
         {
