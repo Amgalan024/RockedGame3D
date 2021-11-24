@@ -7,14 +7,13 @@ using UnityEngine;
 class EnemyAttack : MonoBehaviour, IRocket, IGameObjectComponent<Rocket>
 {
     public Rocket Rocket { get; set; }
-    public GameObject PlayerGameObject { set; get; }
+    public RocketBuilder PlayerRocket { set; get; }
     private IRocketAttack rocketAttack;
     private float timer = 0;
     private Quaternion aimRotation;
     private void Awake()
     {
         rocketAttack = GetComponentInChildren<IRocketAttack>();
-        PlayerGameObject = FindObjectOfType<PlayerMovements>().gameObject;
     }
     private void FixedUpdate()
     {
@@ -39,10 +38,10 @@ class EnemyAttack : MonoBehaviour, IRocket, IGameObjectComponent<Rocket>
     }
     private void AimAtPlayer()
     {
-        float a = transform.position.y - PlayerGameObject.transform.position.y;
-        float b = Vector2.Distance(transform.position, PlayerGameObject.transform.position);
+        float a = transform.position.y - PlayerRocket.transform.position.y;
+        float b = Vector2.Distance(transform.position, PlayerRocket.transform.position);
         float angle = Mathf.Acos(a / b) * Mathf.Rad2Deg;
-        if (transform.position.x > PlayerGameObject.transform.position.x)
+        if (transform.position.x > PlayerRocket.transform.position.x)
         {
             aimRotation = Quaternion.Euler(0, 0, -angle);
         }

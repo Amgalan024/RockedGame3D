@@ -8,16 +8,18 @@ class MeteorSpawner : MonoBehaviour, ISpawner<MeteorBuilder>
 {
     [SerializeField] private MeteorBuilder meteorPrefab;
     [SerializeField] private float spawnfrequency;
-    public float SpawnTimer { get; set; }
+    [SerializeField] private int poolCount;
     public Pool<MeteorBuilder> Pool { get ; set ; }
-    private void Start()
-    {
-        Pool = new Pool<MeteorBuilder>(meteorPrefab,10, transform);
-        Pool.AutoExpand = true;
-    }
+    public RocketBuilder PlayerRocket { set; get; }
+    public float SpawnTimer { get; set; }
     private void Update()
     {
         Spawn();
+    }
+    public void InitializeSpawner(RocketBuilder playerRocket)
+    {
+        Pool = new Pool<MeteorBuilder>(meteorPrefab, poolCount, transform);
+        Pool.AutoExpand = true;
     }
     public void Spawn()
     {

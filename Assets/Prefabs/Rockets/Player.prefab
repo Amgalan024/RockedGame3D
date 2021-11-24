@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 294267938916476342}
   - component: {fileID: 294267938916476346}
   - component: {fileID: 9114714500013181427}
-  - component: {fileID: 6549401787551137085}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -81,12 +80,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d08f8e0503e1b6842a189fcb637f06e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 10
-  energyPoints: 10
-  damage: 10
-  speed: 10
-  projectileSpeed: 20
-  attackSpeed: 0
+  healthPoints: 100
+  energyPoints: 100
+  damage: 50
+  speed: 40
+  projectileSpeed: 60
+  attackSpeed: 0.5
 --- !u!114 &294267938916476342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,22 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57cc2b512b21afa42914392da084af44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6549401787551137085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5951783363219994424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82f2c5ce354432c418c0117b8f069514, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
-  energyBar: {fileID: 0}
-  damageText: {fileID: 0}
-  speedText: {fileID: 0}
 --- !u!1001 &1539951049816723220
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,24 +6,25 @@ using System.Threading.Tasks;
 using UnityEngine;
 class EnemySpawner : MonoBehaviour, ISpawner<RocketBuilder>
 {
-    [SerializeField] private float spawnfrequency;
     [SerializeField] private RocketBuilder enemyPrefab;
-    [SerializeField] private GameObject playerGameObject;
-    public float SpawnTimer { get; set; }
+    [SerializeField] private float spawnfrequency;
+    [SerializeField] private int poolCount;
     public Pool<RocketBuilder> Pool { get; set; }
-    private void Start()
-    {
-        Pool = new Pool<RocketBuilder>(enemyPrefab, 10, transform);
-        foreach (var enemy in Pool.PrefabsPool)
-        {
-            enemy.GetComponent<EnemyAttack>().PlayerGameObject = playerGameObject;
-            enemy.GetComponent<EnemyMovement>().PlayerGameObject = playerGameObject;
-        }
-        Pool.AutoExpand = true;
-    }
+    public RocketBuilder PlayerRocket { set; get; }
+    public float SpawnTimer { get; set; }
     private void Update()
     {
         Spawn();
+    }
+    public void InitializeSpawner(RocketBuilder playerRocket)
+    {
+        Pool = new Pool<RocketBuilder>(enemyPrefab, poolCount, transform);
+        foreach (var enemy in Pool.PrefabsPool)
+        {
+            enemy.GetComponent<EnemyAttack>().PlayerRocket = PlayerRocket;
+            enemy.GetComponent<EnemyMovement>().PlayerRocket = PlayerRocket;
+        }
+        Pool.AutoExpand = true;
     }
     public void Spawn()
     {
