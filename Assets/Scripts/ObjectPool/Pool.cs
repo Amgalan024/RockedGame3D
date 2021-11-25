@@ -74,5 +74,19 @@ public class Pool<T> where T : MonoBehaviour
         }
         throw new Exception($"There is no element type of {typeof(T)}");
     }
-
+    public T GetFreeElement(Vector3 position)
+    {
+        if (this.HasFreeElement(out var element))
+        {
+            element.transform.position = position;
+            return element;
+        }
+        if (this.AutoExpand)
+        {
+            var temp = this.CreateObject(true, true);
+            temp.transform.position = position;
+            return temp;
+        }
+        throw new Exception($"There is no element type of {typeof(T)}");
+    }
 }

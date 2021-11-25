@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 134561364106653108}
   - component: {fileID: 4061814707748860506}
   - component: {fileID: 4591175354060007342}
+  - component: {fileID: 6233129606514556973}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -85,9 +86,9 @@ MonoBehaviour:
   healthPoints: 10
   energyPoints: 10
   damage: 10
-  speed: 10
-  projectileSpeed: -20
-  attackSpeed: 1
+  speed: 30
+  projectileSpeed: -30
+  attackSpeed: 2
 --- !u!114 &134561364106653108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +132,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b57797583fecfa4685d138627f71970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6233129606514556973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5951783363219994424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7670d700db47a284aaa91715404d670d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveRight: 0
+  chaseDistance: 80
 --- !u!1001 &364073075443696026
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7,10 +7,11 @@ using UnityEngine;
 
 public class EnemyMovement : RocketMovement
 {
+    [SerializeField] private bool moveRight;
+    [SerializeField] private float chaseDistance;
     public RocketBuilder PlayerRocket { set; get; }
     private Rigidbody eRigidbody;
     private Quaternion aimRotation;
-    [SerializeField] private bool moveRight;
     private void Awake()
     {
         eRigidbody = GetComponent<Rigidbody>();
@@ -19,9 +20,9 @@ public class EnemyMovement : RocketMovement
     {
         Movement();
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.GetComponent<SideBorder>())
+        if (collision.GetComponent<SideBorder>())
         {
             moveRight = !moveRight;
         }
@@ -29,13 +30,20 @@ public class EnemyMovement : RocketMovement
     public override void Movement()
     {
         AimAtPlayer();
-        if (moveRight)
+        if (Vector3.Distance(transform.position,PlayerRocket.transform.position) >= chaseDistance)
         {
-            eRigidbody.velocity = new Vector2(Rocket.Speed, 0);
+            eRigidbody.velocity = new Vector2(0, -Rocket.Speed);
         }
         else
         {
-            eRigidbody.velocity = new Vector2(-Rocket.Speed, 0);
+            if (moveRight)
+            {
+                eRigidbody.velocity = new Vector2(Rocket.Speed, 0);
+            }
+            else
+            {
+                eRigidbody.velocity = new Vector2(-Rocket.Speed, 0);
+            }
         }
     }
     private void AimAtPlayer()
@@ -52,5 +60,10 @@ public class EnemyMovement : RocketMovement
             aimRotation = Quaternion.Euler(0, 0, angle);
         }
         transform.rotation = aimRotation;
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y-chaseDistance));
     }
 }

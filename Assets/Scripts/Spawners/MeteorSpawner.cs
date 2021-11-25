@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 class MeteorSpawner : MonoBehaviour, ISpawner<MeteorBuilder>
 {
+    [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private MeteorBuilder meteorPrefab;
     [SerializeField] private float spawnfrequency;
     [SerializeField] private int poolCount;
@@ -23,10 +24,11 @@ class MeteorSpawner : MonoBehaviour, ISpawner<MeteorBuilder>
     }
     public void Spawn()
     {
+        int spawnPointIndex = UnityEngine.Random.Range(0,spawnPoints.Length);
         if (SpawnTimer <= 0)
         {
             SpawnTimer = spawnfrequency;
-            Pool.GetFreeElement().InitializeMeteor();
+            Pool.GetFreeElement(spawnPoints[spawnPointIndex].position).InitializeMeteor();
         }
         CountDown();
     }

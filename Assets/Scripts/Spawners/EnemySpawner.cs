@@ -21,8 +21,8 @@ class EnemySpawner : MonoBehaviour, ISpawner<RocketBuilder>
         Pool = new Pool<RocketBuilder>(enemyPrefab, poolCount, transform);
         foreach (var enemy in Pool.PrefabsPool)
         {
-            enemy.GetComponent<EnemyAttack>().PlayerRocket = PlayerRocket;
-            enemy.GetComponent<EnemyMovement>().PlayerRocket = PlayerRocket;
+            enemy.GetComponent<EnemyAttack>().PlayerRocket = playerRocket;
+            enemy.GetComponent<EnemyMovement>().PlayerRocket = playerRocket;
         }
         Pool.AutoExpand = true;
     }
