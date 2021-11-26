@@ -41,7 +41,6 @@ public class MeteorInteractions : MonoBehaviour, IGameObjectComponent<Meteor>, I
     private void OnMeteorDestroyed()
     {
         animator.SetBool("IsDestroyed", true);
-        Debug.Log($"Meteor Destroyed");
     }
     public void PlayExplodeAnim()
     {

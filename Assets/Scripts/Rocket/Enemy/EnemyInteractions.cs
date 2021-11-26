@@ -32,10 +32,11 @@ public class EnemyInteractions : MonoBehaviour, IRocket, IGameObjectComponent<Ro
     public void InitializeComponent(Rocket rocket)
     {
         this.Rocket = rocket;
-        Rocket.OnPlayerDied += OnPlayerDied;
+        Rocket.OnRocketDestroyed += OnEnemyDied;
     }
-    private void OnPlayerDied()
+    private void OnEnemyDied()
     {
+        Rocket.RestoreHP(Rocket.MaxHealthPoint);
         animator.SetBool("IsDestroyed",true);
     }
     public void PlayExplodeAnim()

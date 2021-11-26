@@ -5,13 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-class EnemyBorder : MonoBehaviour
+class DownBorder : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<EnemyMovement>())
         {
-            other.gameObject.SetActive(false);
+            other.GetComponent<EnemyMovement>().Rocket.DestroyRocket();
+        }
+        if (other.GetComponent<MeteorMovement>())
+        {
+            other.GetComponent<MeteorMovement>().Meteor.DestroyMeteor();
         }
     }
 }

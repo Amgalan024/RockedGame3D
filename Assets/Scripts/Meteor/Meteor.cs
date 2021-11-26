@@ -9,22 +9,28 @@ public class Meteor
 {
     public event Action OnMeteorDestroyed;
     public event Action<int> OnHealthPointsChanged;
-    public int HealthPoits { private set; get; }
+    public int HealthPoints { private set; get; }
     public int Damage { private set; get; }
     public float Speed { private set; get; }
     public Meteor(int healthPoints, int damage, float speed)
     {
-        this.HealthPoits = healthPoints;
+        this.HealthPoints = healthPoints;
         this.Damage = damage;
         this.Speed = speed;
     }
     public void TakeDamage(int damage)
     {
-        HealthPoits -= damage;
-        OnHealthPointsChanged?.Invoke(this.HealthPoits);
-        if (HealthPoits <= 0)
+        HealthPoints -= damage;
+        OnHealthPointsChanged?.Invoke(this.HealthPoints);
+        if (HealthPoints <= 0)
         {
             OnMeteorDestroyed?.Invoke();
         }
+    }
+    public void DestroyMeteor()
+    {
+        this.HealthPoints = 0;
+        OnHealthPointsChanged?.Invoke(this.HealthPoints);
+        OnMeteorDestroyed?.Invoke();
     }
 }

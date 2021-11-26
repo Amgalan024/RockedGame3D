@@ -574,7 +574,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 708179418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -61, z: 93}
+  m_LocalPosition: {x: 0, y: -80.4, z: 93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 963194228}
@@ -591,8 +591,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 139.12225, y: 8.03553, z: 1}
-  m_Center: {x: 2.2554474, y: 3.517765, z: 0}
+  m_Size: {x: 345.815, y: 8.03553, z: 14.267993}
+  m_Center: {x: -0.93640137, y: 3.517765, z: 0.45751715}
 --- !u!114 &708179421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1063,8 +1063,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.6813164, y: 205.12152, z: 36.505943}
-  m_Center: {x: 0.8406582, y: 4.0147095, z: -1.4499855}
+  m_Size: {x: 2.6813164, y: 290.5217, z: 36.505943}
+  m_Center: {x: 0.8406582, y: -38.68538, z: -1.4499855}
 --- !u!4 &1063356467
 Transform:
   m_ObjectHideFlags: 0
@@ -1124,7 +1124,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 294267938916476343, guid: b2226a8254989604eb29c794bab3251d, type: 3}
   spawnfrequency: 3
-  poolCount: 10
+  maxEnemiesCount: 3
+  currentEnemiesCount: 0
 --- !u!1001 &1143909051
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1569,8 +1570,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.6813164, y: 205.12152, z: 36.505943}
-  m_Center: {x: 0.8406582, y: 4.0147095, z: -1.4499855}
+  m_Size: {x: 2.6813164, y: 288.87173, z: 36.505943}
+  m_Center: {x: 0.8406582, y: -37.860397, z: -1.4499855}
 --- !u!1 &1874267359
 GameObject:
   m_ObjectHideFlags: 0
@@ -1809,6 +1810,10 @@ PrefabInstance:
     - target: {fileID: 1652311861218124001, guid: e6b6dabca0c95094ab8f519ed87d3ca1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441608597365093111, guid: e6b6dabca0c95094ab8f519ed87d3ca1, type: 3}
+      propertyPath: spawnfrequency
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6b6dabca0c95094ab8f519ed87d3ca1, type: 3}

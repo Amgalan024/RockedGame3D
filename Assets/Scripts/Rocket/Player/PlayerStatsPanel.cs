@@ -25,7 +25,7 @@ public class PlayerStatsPanel : MonoBehaviour, IRocket,IGameObjectComponent<Rock
         rocket.OnEnergyPointsChanged += OnEnergyPointsChanged;
         rocket.OnDamageChanged += OnDamageChanged;
         rocket.OnSpeedChanged += OnSpeedChanged;
-        rocket.OnPlayerDied += OnPlayerDied;
+        rocket.OnRocketDestroyed += OnPlayerDied;
     }
     private void OnPlayerDied()
     {
@@ -33,7 +33,7 @@ public class PlayerStatsPanel : MonoBehaviour, IRocket,IGameObjectComponent<Rock
         Rocket.OnEnergyPointsChanged -= OnEnergyPointsChanged;
         Rocket.OnDamageChanged -= OnDamageChanged;
         Rocket.OnSpeedChanged -= OnSpeedChanged;
-        Rocket.OnPlayerDied -= OnPlayerDied;
+        Rocket.OnRocketDestroyed -= OnPlayerDied;
     }
     private void OnHealthPointsChanged(int healthPoints)
     {

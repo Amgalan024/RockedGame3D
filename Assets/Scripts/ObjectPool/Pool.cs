@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Pool<T> where T : MonoBehaviour
 {
+    public event Action<T> OnPoolExpanded;
     public T Prefab { get; }
     public bool AutoExpand { set; get; }
     public Transform Container { get; }
@@ -37,6 +38,7 @@ public class Pool<T> where T : MonoBehaviour
             createdObject.transform.position = Container.position;
             createdObject.gameObject.SetActive(isActiveByDeafult);
             this.PrefabsPool.Add(createdObject);
+            OnPoolExpanded?.Invoke(createdObject);
             return createdObject;
         }
         else

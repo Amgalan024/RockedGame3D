@@ -8,7 +8,8 @@ class EnemySpawner : MonoBehaviour, ISpawner<RocketBuilder>
 {
     [SerializeField] private RocketBuilder enemyPrefab;
     [SerializeField] private float spawnfrequency;
-    [SerializeField] private int poolCount;
+    [SerializeField] private int maxEnemiesCount;
+    [SerializeField] private int currentEnemiesCount = 0;
     public Pool<RocketBuilder> Pool { get; set; }
     public RocketBuilder PlayerRocket { set; get; }
     public float SpawnTimer { get; set; }
@@ -18,20 +19,40 @@ class EnemySpawner : MonoBehaviour, ISpawner<RocketBuilder>
     }
     public void InitializeSpawner(RocketBuilder playerRocket)
     {
-        Pool = new Pool<RocketBuilder>(enemyPrefab, poolCount, transform);
+        this.PlayerRocket = playerRocket;
+        Pool = new Pool<RocketBuilder>(enemyPrefab, maxEnemiesCount, transform);
         foreach (var enemy in Pool.PrefabsPool)
         {
-            enemy.GetComponent<EnemyAttack>().PlayerRocket = playerRocket;
-            enemy.GetComponent<EnemyMovement>().PlayerRocket = playerRocket;
+            enemy.InitializeRocket();
+            enemy.GetComponent<EnemyAttack>().PlayerRocket = PlayerRocket;
+            enemy.GetComponent<EnemyMovement>().PlayerRocket = PlayerRocket;
+            enemy.Rocket.OnRocketDestroyed += OnEnemyDestroyed;
         }
         Pool.AutoExpand = true;
+        Pool.OnPoolExpanded += OnPoolExpanded;
     }
+
+    private void OnPoolExpanded(RocketBuilder enemy)
+    {
+        enemy.InitializeRocket();
+        enemy.GetComponent<EnemyAttack>().PlayerRocket = PlayerRocket;
+        enemy.GetComponent<EnemyMovement>().PlayerRocket = PlayerRocket;
+        enemy.Rocket.OnRocketDestroyed += OnEnemyDestroyed;
+    }
+    private void OnEnemyDestroyed()
+    {
+        SpawnTimer = spawnfrequency;
+        currentEnemiesCount -= 1;
+        Debug.Log($"currentEnemiesCount = {currentEnemiesCount}");
+    }
+
     public void Spawn()
     {
-        if (SpawnTimer <= 0)
+        if ((SpawnTimer <= 0) && (currentEnemiesCount < maxEnemiesCount))
         {
             SpawnTimer = spawnfrequency;
-            Pool.GetFreeElement().InitializeRocket();
+            Pool.GetFreeElement();
+            currentEnemiesCount++;
         }
         CountDown();
     }

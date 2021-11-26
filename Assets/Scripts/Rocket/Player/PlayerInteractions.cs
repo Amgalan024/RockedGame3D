@@ -28,12 +28,12 @@ public class PlayerInteractions : MonoBehaviour, IGameObjectComponent<Rocket>, I
     public void InitializeComponent(Rocket rocket)
     {
         Rocket = rocket;
-        Rocket.OnPlayerDied += OnPlayerDied;
+        Rocket.OnRocketDestroyed += OnPlayerDied;
     }
 
     private void OnPlayerDied()
     {
         Debug.Log($"Player Died");
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

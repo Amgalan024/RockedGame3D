@@ -13,7 +13,7 @@ public class MeteorHealthPointsPanel : MonoBehaviour, IGameObjectComponent<Meteo
     public void InitializeComponent(Meteor meteor)
     {
         this.Meteor = meteor;
-        SetSliderValue(healthBar, meteor.HealthPoits);
+        SetSliderValue(healthBar, meteor.HealthPoints);
         meteor.OnHealthPointsChanged += OnHealthPointsChanged;
         meteor.OnMeteorDestroyed += OnMeteorDestroyed;
     }
