@@ -17,11 +17,8 @@ public class MainSceneHandler : MonoBehaviour
     private RocketBuilder playerRocket;
     private void Awake()
     {
-        Debug.Log($"spawnPosition {playerSpawnPoint.position}");
         playerRocket = Instantiate(playerRocketPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
-        Debug.Log($"spawnPosition {playerRocket.transform.position}");
         playerRocket.InitializeRocket();
-
         cinemachineVirtualCamera.Follow = playerRocket.transform;
         playerStatsPanel.InitializeComponent(playerRocket.Rocket);
         enemySpawner.InitializeSpawner(playerRocket);
