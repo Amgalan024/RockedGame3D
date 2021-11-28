@@ -7,13 +7,7 @@ using UnityEngine;
 
 public class PlayerInteractions : MonoBehaviour, IGameObjectComponent<Rocket>, IRocket
 {
-    private CapsuleCollider capsuleCollider;
     public Rocket Rocket { get; set; }
-    //private Animator
-    private void Awake()
-    {
-        capsuleCollider = GetComponent<CapsuleCollider>();
-    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<MeteorMovement>())
@@ -30,8 +24,7 @@ public class PlayerInteractions : MonoBehaviour, IGameObjectComponent<Rocket>, I
         Rocket = rocket;
         Rocket.OnRocketDestroyed += OnPlayerDied;
     }
-
-    private void OnPlayerDied()
+    private void OnPlayerDied(Rocket player)
     {
         Debug.Log($"Player Died");
         gameObject.SetActive(false);

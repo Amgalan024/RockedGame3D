@@ -23,29 +23,11 @@ class EnemySpawner : MonoBehaviour, ISpawner<RocketBuilder>
         Pool = new Pool<RocketBuilder>(enemyPrefab, maxEnemiesCount, transform);
         foreach (var enemy in Pool.PrefabsPool)
         {
-            enemy.InitializeRocket();
-            enemy.GetComponent<EnemyAttack>().PlayerRocket = PlayerRocket;
-            enemy.GetComponent<EnemyMovement>().PlayerRocket = PlayerRocket;
-            enemy.Rocket.OnRocketDestroyed += OnEnemyDestroyed;
+            InitializeEnemyRocket(enemy);
         }
         Pool.AutoExpand = true;
         Pool.OnPoolExpanded += OnPoolExpanded;
     }
-
-    private void OnPoolExpanded(RocketBuilder enemy)
-    {
-        enemy.InitializeRocket();
-        enemy.GetComponent<EnemyAttack>().PlayerRocket = PlayerRocket;
-        enemy.GetComponent<EnemyMovement>().PlayerRocket = PlayerRocket;
-        enemy.Rocket.OnRocketDestroyed += OnEnemyDestroyed;
-    }
-    private void OnEnemyDestroyed()
-    {
-        SpawnTimer = spawnfrequency;
-        currentEnemiesCount -= 1;
-        Debug.Log($"currentEnemiesCount = {currentEnemiesCount}");
-    }
-
     public void Spawn()
     {
         if ((SpawnTimer <= 0) && (currentEnemiesCount < maxEnemiesCount))
@@ -62,5 +44,24 @@ class EnemySpawner : MonoBehaviour, ISpawner<RocketBuilder>
         {
             SpawnTimer = SpawnTimer - Time.deltaTime;
         }
+    }
+    private void InitializeEnemyRocket(RocketBuilder enemy)
+    {
+        enemy.InitializeRocket();
+        enemy.GetComponent<EnemyAttack>().PlayerRocket = PlayerRocket;
+        enemy.GetComponent<EnemyMovement>().PlayerRocket = PlayerRocket;
+        enemy.GetComponent<EnemyInteractions>().PlayerRocket = PlayerRocket;
+        enemy.Rocket.OnRocketDestroyed += OnEnemyDestroyed;
+    }
+    private void OnEnemyDestroyed(Rocket enemy)
+    {
+        enemy.RestoreHP(enemy.MaxHealthPoint);
+        SpawnTimer = spawnfrequency;
+        currentEnemiesCount -= 1;
+        Debug.Log($"currentEnemiesCount = {currentEnemiesCount}");
+    }
+    private void OnPoolExpanded(RocketBuilder enemy)
+    {
+        InitializeEnemyRocket(enemy);
     }
 }

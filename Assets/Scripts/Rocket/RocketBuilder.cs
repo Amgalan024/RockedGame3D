@@ -13,6 +13,7 @@ public class RocketBuilder : MonoBehaviour,IRocket
     [SerializeField] private float speed;
     [SerializeField] private float projectileSpeed;
     [SerializeField] private float attackSpeed;
+    [SerializeField] private int reward;
 
     public Rocket Rocket { set; get; }
     private void Awake()
@@ -21,7 +22,7 @@ public class RocketBuilder : MonoBehaviour,IRocket
     }
     public void InitializeRocket()
     {
-        Rocket = new Rocket(healthPoints, energyPoints, damage, speed, projectileSpeed, attackSpeed);
+        Rocket = new Rocket(healthPoints, energyPoints, damage, speed, projectileSpeed, attackSpeed, reward);
         foreach (var component in GetComponents<IGameObjectComponent<Rocket>>())
         {
             component.InitializeComponent(this.Rocket);

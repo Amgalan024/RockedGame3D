@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-public class RocketProjectileMovement : MonoBehaviour, IGameObjectComponent<Rocket>
+public class RocketProjectileMovement : MonoBehaviour, IGameObjectComponent<Rocket>, IRocket
 {
     [SerializeField] private float speed;
     [SerializeField] private int damage;
     private Rigidbody pRigidbody;
+
+    public Rocket Rocket { get; set; }
+
     private void Awake()
     {
         pRigidbody = GetComponent<Rigidbody>();
@@ -30,6 +33,7 @@ public class RocketProjectileMovement : MonoBehaviour, IGameObjectComponent<Rock
     }
     public void InitializeComponent(Rocket rocket)
     {
+        Rocket = rocket;
         speed = rocket.ProjectileSpeed;
         damage = rocket.Damage;
     }
