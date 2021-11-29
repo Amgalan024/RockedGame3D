@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using UnityEngine;
 public class Rocket
 {
     public event Action<Rocket> OnRocketDestroyed;
@@ -45,6 +45,11 @@ public class Rocket
             OnRocketDestroyed?.Invoke(this);
         }
     }
+    public void RestoreEP(int heal)
+    {
+        this.EnergyPoint += heal;
+        OnEnergyPointsChanged?.Invoke(this.EnergyPoint);
+    }
     public void RestoreHP(int heal)
     {
         this.HealthPoint += heal;
@@ -65,5 +70,15 @@ public class Rocket
     {
         this.PlayerScore -= points;
         OnPlayerScoreChanged?.Invoke(this.PlayerScore);
+    }
+    public void MultiplyDamage(int multiplier)
+    {
+        this.Damage =this.Damage * multiplier;
+        OnDamageChanged?.Invoke(this.Damage);
+    }
+    public void DivideDamage(int divider)
+    {
+        this.Damage = this.Damage / divider;
+        OnDamageChanged?.Invoke(this.Damage);
     }
 }

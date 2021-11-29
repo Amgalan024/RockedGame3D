@@ -19,6 +19,13 @@ public class PlayerInteractions : MonoBehaviour, IGameObjectComponent<Rocket>, I
             Rocket.TakeDamage(collision.gameObject.GetComponent<RocketProjectileMovement>().GetDamage());
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<PlayerBuff>())
+        {
+            StartCoroutine(other.GetComponent<PlayerBuff>().Buff(Rocket));
+        }
+    }
     public void InitializeComponent(Rocket rocket)
     {
         Rocket = rocket;

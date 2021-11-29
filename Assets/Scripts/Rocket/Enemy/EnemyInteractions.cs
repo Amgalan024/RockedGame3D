@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-
-
 public class EnemyInteractions : MonoBehaviour, IRocket, IGameObjectComponent<Rocket>
 {
     public Rocket Rocket { get; set; }
@@ -18,6 +16,7 @@ public class EnemyInteractions : MonoBehaviour, IRocket, IGameObjectComponent<Ro
             if (Rocket.HealthPoint <= 0)
             {
                 PlayerRocket.Rocket.AddScorePoints(Rocket.Reward);
+                Rocket.RestoreHP(Rocket.MaxHealthPoint);
             }
         }
     }

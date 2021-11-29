@@ -90,7 +90,7 @@ MonoBehaviour:
   speed: 30
   projectileSpeed: -50
   attackSpeed: 2
-  reward: 0
+  reward: 500
 --- !u!114 &134561364106653108
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,11 +12,13 @@ public class Meteor
     public int HealthPoints { private set; get; }
     public int Damage { private set; get; }
     public float Speed { private set; get; }
-    public Meteor(int healthPoints, int damage, float speed)
+    public int Reward { private set; get; }
+    public Meteor(int healthPoints, int damage, float speed, int reward)
     {
         this.HealthPoints = healthPoints;
         this.Damage = damage;
         this.Speed = speed;
+        this.Reward = reward;
     }
     public void TakeDamage(int damage)
     {

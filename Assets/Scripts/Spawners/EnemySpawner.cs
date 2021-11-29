@@ -55,7 +55,6 @@ class EnemySpawner : MonoBehaviour, ISpawner<RocketBuilder>
     }
     private void OnEnemyDestroyed(Rocket enemy)
     {
-        enemy.RestoreHP(enemy.MaxHealthPoint);
         SpawnTimer = spawnfrequency;
         currentEnemiesCount -= 1;
         Debug.Log($"currentEnemiesCount = {currentEnemiesCount}");

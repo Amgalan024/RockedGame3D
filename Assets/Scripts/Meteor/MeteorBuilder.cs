@@ -10,6 +10,8 @@ public class MeteorBuilder : MonoBehaviour, IMeteor
     [SerializeField] private int healthPoints;
     [SerializeField] private int damage;
     [SerializeField] private float speed;
+    [SerializeField] private int reward;
+
     public Meteor Meteor { set; get; } 
     private void Awake()
     {
@@ -17,7 +19,7 @@ public class MeteorBuilder : MonoBehaviour, IMeteor
     }
     public void InitializeMeteor()
     {
-        Meteor = new Meteor(healthPoints, damage, speed);
+        Meteor = new Meteor(healthPoints, damage, speed, reward);
         foreach (var component in GetComponents<IGameObjectComponent<Meteor>>())
         {
             component.InitializeComponent(Meteor);

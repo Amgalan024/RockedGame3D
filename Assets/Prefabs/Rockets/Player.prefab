@@ -86,6 +86,7 @@ MonoBehaviour:
   speed: 60
   projectileSpeed: 180
   attackSpeed: 0.5
+  reward: 0
 --- !u!114 &294267938916476342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +137,10 @@ PrefabInstance:
     - target: {fileID: 1245934087325195550, guid: f9c866956b8c53249802650a6cdf925a, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245934087325195550, guid: f9c866956b8c53249802650a6cdf925a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1245934087325195551, guid: f9c866956b8c53249802650a6cdf925a, type: 3}
       propertyPath: m_RootOrder

@@ -13,6 +13,8 @@ public class PlayerStatsPanel : MonoBehaviour, IRocket,IGameObjectComponent<Rock
     [SerializeField] private Slider energyBar;
     [SerializeField] private Text damageText;
     [SerializeField] private Text speedText;
+    [SerializeField] private Text scoreText;
+
     public Rocket Rocket { get; set; }
     public void InitializeComponent(Rocket rocket)
     {
@@ -21,10 +23,12 @@ public class PlayerStatsPanel : MonoBehaviour, IRocket,IGameObjectComponent<Rock
         SetSliderValue(energyBar, rocket.EnergyPoint);
         damageText.text = rocket.Damage.ToString();
         speedText.text = rocket.Speed.ToString();
+        scoreText.text = rocket.PlayerScore.ToString();
         rocket.OnHealthPointsChanged += OnHealthPointsChanged;
         rocket.OnEnergyPointsChanged += OnEnergyPointsChanged;
         rocket.OnDamageChanged += OnDamageChanged;
         rocket.OnSpeedChanged += OnSpeedChanged;
+        rocket.OnPlayerScoreChanged += OnPlayerScoreChanged;
         rocket.OnRocketDestroyed += OnPlayerDied;
     }
     private void OnPlayerDied(Rocket player)
@@ -33,7 +37,12 @@ public class PlayerStatsPanel : MonoBehaviour, IRocket,IGameObjectComponent<Rock
         Rocket.OnEnergyPointsChanged -= OnEnergyPointsChanged;
         Rocket.OnDamageChanged -= OnDamageChanged;
         Rocket.OnSpeedChanged -= OnSpeedChanged;
+        Rocket.OnPlayerScoreChanged -= OnPlayerScoreChanged;
         Rocket.OnRocketDestroyed -= OnPlayerDied;
+    }
+    private void OnPlayerScoreChanged(int score)
+    {
+        scoreText.text = score.ToString();
     }
     private void OnHealthPointsChanged(int healthPoints)
     {

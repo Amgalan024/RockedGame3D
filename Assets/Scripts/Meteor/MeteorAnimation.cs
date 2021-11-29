@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class EnemyAnimation : MonoBehaviour,IRocket, IGameObjectComponent<Rocket>
+public class MeteorAnimation : MonoBehaviour, IMeteor, IGameObjectComponent<Meteor>
 {
     private Animator animator;
-    public Rocket Rocket { get; set; }
+    public Meteor Meteor { get; set; }
     private ParticleSystem[] explode;
     private void Awake()
     {
@@ -19,19 +19,14 @@ public class EnemyAnimation : MonoBehaviour,IRocket, IGameObjectComponent<Rocket
     {
         animator.SetBool("IsDestroyed", false);
     }
-    public void InitializeComponent(Rocket rocket)
+    public void InitializeComponent(Meteor meteor)
     {
-        this.Rocket = rocket;
-        Rocket.OnRocketDestroyed += OnEnemyDied;
+        Meteor = meteor;
+        Meteor.OnMeteorDestroyed += OnMeteorDestroyed;
     }
-    private void OnEnemyDied(Rocket rocket)
+    private void OnMeteorDestroyed()
     {
         animator.SetBool("IsDestroyed", true);
-    }
-    #region AnimatorEvents
-    public void SetActiveFalse()
-    {
-        gameObject.SetActive(false);
     }
     public void PlayExplodeAnim()
     {
@@ -40,5 +35,8 @@ public class EnemyAnimation : MonoBehaviour,IRocket, IGameObjectComponent<Rocket
             explode[i].Play();
         }
     }
-    #endregion
+    public void SetActiveFalse()
+    {
+        gameObject.SetActive(false);
+    }
 }

@@ -19,7 +19,12 @@ class MeteorSpawner : MonoBehaviour, ISpawner<MeteorBuilder>
     }
     public void InitializeSpawner(RocketBuilder playerRocket)
     {
+        this.PlayerRocket = playerRocket;
         Pool = new Pool<MeteorBuilder>(meteorPrefab, poolCount, transform);
+        foreach (var meteor in Pool.PrefabsPool)
+        {
+            meteor.GetComponent<MeteorInteractions>().PlayerRocket = this.PlayerRocket;
+        }
         Pool.AutoExpand = true;
     }
     public void Spawn()
