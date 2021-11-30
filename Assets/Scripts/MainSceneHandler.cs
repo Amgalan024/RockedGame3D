@@ -12,6 +12,7 @@ public class MainSceneHandler : MonoBehaviour
     [SerializeField] private Transform playerSpawnPoint;
     [SerializeField] private EnemySpawner enemySpawner;
     [SerializeField] private MeteorSpawner meteorSpawner;
+    [SerializeField] private ItemSpawner itemSpawner;
     [SerializeField] private PlayerStatsPanel playerStatsPanel;
     [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera; 
     private RocketBuilder playerRocket;
@@ -23,5 +24,6 @@ public class MainSceneHandler : MonoBehaviour
         playerStatsPanel.InitializeComponent(playerRocket.Rocket);
         enemySpawner.InitializeSpawner(playerRocket);
         meteorSpawner.InitializeSpawner(playerRocket);
+        itemSpawner.InitializeSpawner(playerRocket);
     }
 }

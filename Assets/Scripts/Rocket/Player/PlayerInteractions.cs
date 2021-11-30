@@ -21,9 +21,9 @@ public class PlayerInteractions : MonoBehaviour, IGameObjectComponent<Rocket>, I
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerBuff>())
+        if (other.GetComponent<BuffItem>())
         {
-            StartCoroutine(other.GetComponent<PlayerBuff>().Buff(Rocket));
+            StartCoroutine(other.GetComponent<BuffItem>().Buff(Rocket));
         }
     }
     public void InitializeComponent(Rocket rocket)

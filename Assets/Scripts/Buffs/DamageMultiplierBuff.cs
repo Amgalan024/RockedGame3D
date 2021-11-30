@@ -6,11 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class DamageMultiplierBuff : PlayerBuff
+public class DamageMultiplierBuff : BuffItem
 {
     [SerializeField] private float duration;
     [SerializeField] private int multiplier;
-
     public override IEnumerator Buff(Rocket rocket)
     {
         rocket.MultiplyDamage(multiplier);
