@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
+using Utils;
 
-interface ISpawner<T> where T : MonoBehaviour
+namespace Spawners
 {
-    RocketBuilder PlayerRocket { set; get; }
-    float SpawnTimer { set; get; }
-    Pool<T> Pool { set; get; }
-    void Spawn();
-    void CountDown();
-    void InitializeSpawner(RocketBuilder playerRocket);
+    public interface ISpawner<T> where T : MonoBehaviour
+    {
+        event Action<T> OnSpawned; 
+        float SpawnTimer { set; get; }
+        Pool<T> Pool { set; get; }
+        void Spawn();
+        void CountDown();
+    }
 }

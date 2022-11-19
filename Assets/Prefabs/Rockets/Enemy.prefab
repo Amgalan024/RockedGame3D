@@ -91,6 +91,7 @@ MonoBehaviour:
   projectileSpeed: -50
   attackSpeed: 2
   reward: 500
+  startAmmo: 100
 --- !u!114 &134561364106653108
 MonoBehaviour:
   m_ObjectHideFlags: 0

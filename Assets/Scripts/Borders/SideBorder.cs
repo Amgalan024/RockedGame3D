@@ -1,32 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Rocket.Components.Player;
 using UnityEngine;
 
-public class SideBorder : MonoBehaviour
+namespace Borders
 {
-    [SerializeField] GameObject otherBorder;
-    [SerializeField] private float offset;
-    private BoxCollider ownBoxCollider;
-    private BoxCollider otherBoxCollider;
-    private void Start()
+    public class SideBorder : MonoBehaviour
     {
-        ownBoxCollider = GetComponent<BoxCollider>();
-        otherBoxCollider = otherBorder.GetComponent<BoxCollider>();
-    }
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.GetComponent<PlayerMovement>())
+        [SerializeField] GameObject _otherBorder;
+        [SerializeField] private float _offset;
+
+        private BoxCollider _ownBoxCollider;
+        private BoxCollider _otherBoxCollider;
+
+        private void Start()
         {
-            if (gameObject.name == "RightBorder")
+            _ownBoxCollider = GetComponent<BoxCollider>();
+            _otherBoxCollider = _otherBorder.GetComponent<BoxCollider>();
+        }
+
+        private void OnTriggerEnter(Collider collision)
+        {
+            if (collision.GetComponent<PlayerMovementStrategy>())
             {
-                collision.transform.position = new Vector2(otherBorder.transform.position.x + offset, collision.transform.position.y);
-            }
-            if (gameObject.name == "LeftBorder")
-            {
-                collision.transform.position = new Vector2(otherBorder.transform.position.x - offset, collision.transform.position.y);
+                //todo: убрать условие, всегда добавлять оффсет, в самих объектах выставить разные в зависимости от стороны
+                if (gameObject.name == "RightBorder")
+                {
+                    collision.transform.position = new Vector2(_otherBorder.transform.position.x + _offset,
+                        collision.transform.position.y);
+                }
+
+                if (gameObject.name == "LeftBorder")
+                {
+                    collision.transform.position = new Vector2(_otherBorder.transform.position.x - _offset,
+                        collision.transform.position.y);
+                }
             }
         }
     }

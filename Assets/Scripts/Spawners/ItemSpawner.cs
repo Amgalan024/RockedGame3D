@@ -1,53 +1,72 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Items;
 using UnityEngine;
+using Utils;
+using Random = UnityEngine.Random;
 
-public class ItemSpawner :MonoBehaviour, ISpawner<BuffItem>
+namespace Spawners
 {
-    [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private BuffItem itemPrefab;
-    [SerializeField] private float spawnfrequency;
-    [SerializeField] private int poolCount;
-    [SerializeField] private int spawnChance;
-    public RocketBuilder PlayerRocket { get; set; }
-    public float SpawnTimer { get ; set ; }
-    public Pool<BuffItem> Pool { get; set; }
-    private void Update()
+    public class ItemSpawner : MonoBehaviour, ISpawner<InteractableItem>
     {
-        Spawn();
-    }
-    public void InitializeSpawner(RocketBuilder playerRocket)
-    {
-        this.PlayerRocket = playerRocket;
-        Pool = new Pool<BuffItem>(itemPrefab, poolCount, transform);
-        Pool.AutoExpand = true;
-    }
-    public void Spawn()
-    {
-        if (SpawnTimer <= 0)
+        public event Action<InteractableItem> OnSpawned;
+
+        [SerializeField] private Transform[] _spawnPoints;
+        [SerializeField] private InteractableItem _itemPrefab;
+        [SerializeField] private float _spawnFrequency;
+        [SerializeField] private int _poolCount;
+        [SerializeField] private int _spawnChance;
+
+        public float SpawnTimer { get; set; }
+        public Pool<InteractableItem> Pool { get; set; }
+
+        private void Start()
         {
-            int randomedChance = UnityEngine.Random.Range(0, 100);
-            if (randomedChance <= spawnChance)
-            {
-                int spawnPointIndex = UnityEngine.Random.Range(0, spawnPoints.Length);
-                SpawnTimer = spawnfrequency;
-                Pool.GetFreeElement(spawnPoints[spawnPointIndex].position);
-            }
-            else
-            {
-                SpawnTimer = spawnfrequency;
-            }
+            SpawnTimer = _spawnFrequency;
         }
-        CountDown();
-    }
-    public void CountDown()
-    {
-        if (SpawnTimer >= 0)
+
+        private void Update()
         {
-            SpawnTimer = SpawnTimer - Time.deltaTime;
+            Spawn();
+        }
+
+        public void InitializeSpawner()
+        {
+            Pool = new Pool<InteractableItem>(_itemPrefab, _poolCount, transform)
+            {
+                AutoExpand = true
+            };
+        }
+
+        public void Spawn()
+        {
+            if (SpawnTimer <= 0)
+            {
+                int randomChance = Random.Range(0, 100);
+
+                if (randomChance <= _spawnChance)
+                {
+                    int spawnPointIndex = Random.Range(0, _spawnPoints.Length);
+
+                    var spawnedItem = Pool.GetFreeElement(_spawnPoints[spawnPointIndex].position);
+                    OnSpawned?.Invoke(spawnedItem);
+
+                    SpawnTimer = _spawnFrequency;
+                }
+                else
+                {
+                    SpawnTimer = _spawnFrequency;
+                }
+            }
+
+            CountDown();
+        }
+
+        public void CountDown()
+        {
+            if (SpawnTimer >= 0)
+            {
+                SpawnTimer -= Time.deltaTime;
+            }
         }
     }
 }

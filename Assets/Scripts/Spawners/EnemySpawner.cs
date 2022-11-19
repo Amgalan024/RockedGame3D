@@ -1,66 +1,68 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Rocket.Components.Enemy;
 using UnityEngine;
-class EnemySpawner : MonoBehaviour, ISpawner<RocketBuilder>
+using Utils;
+
+namespace Spawners
 {
-    [SerializeField] private RocketBuilder enemyPrefab;
-    [SerializeField] private float spawnfrequency;
-    [SerializeField] private int maxEnemiesCount;
-    [SerializeField] private int currentEnemiesCount = 0;
-    public Pool<RocketBuilder> Pool { get; set; }
-    public RocketBuilder PlayerRocket { set; get; }
-    public float SpawnTimer { get; set; }
-    private void Update()
+    public class EnemySpawner : MonoBehaviour, ISpawner<EnemyInitializer>
     {
-        Spawn();
-    }
-    public void InitializeSpawner(RocketBuilder playerRocket)
-    {
-        this.PlayerRocket = playerRocket;
-        Pool = new Pool<RocketBuilder>(enemyPrefab, maxEnemiesCount, transform);
-        foreach (var enemy in Pool.PrefabsPool)
+        public event Action<EnemyInitializer> OnSpawned;
+
+        [SerializeField] private EnemyInitializer _enemyPrefab;
+        [SerializeField] private float _spawnFrequency;
+        [SerializeField] private int _maxEnemiesCount;
+        [SerializeField] private int _currentEnemiesCount;
+
+        public Pool<EnemyInitializer> Pool { get; set; }
+        public float SpawnTimer { get; set; }
+
+        private void Start()
         {
-            InitializeEnemyRocket(enemy);
+            SpawnTimer = _spawnFrequency;
         }
-        Pool.AutoExpand = true;
-        Pool.OnPoolExpanded += OnPoolExpanded;
-    }
-    public void Spawn()
-    {
-        if ((SpawnTimer <= 0) && (currentEnemiesCount < maxEnemiesCount))
+
+        private void Update()
         {
-            SpawnTimer = spawnfrequency;
-            Pool.GetFreeElement();
-            currentEnemiesCount++;
+            Spawn();
         }
-        CountDown();
-    }
-    public void CountDown()
-    {
-        if (SpawnTimer >= 0)
+
+        public void InitializeSpawner()
         {
-            SpawnTimer = SpawnTimer - Time.deltaTime;
+            Pool = new Pool<EnemyInitializer>(_enemyPrefab, _maxEnemiesCount, transform);
+
+            Pool.AutoExpand = true;
         }
-    }
-    private void InitializeEnemyRocket(RocketBuilder enemy)
-    {
-        enemy.InitializeRocket();
-        enemy.GetComponent<EnemyAttack>().PlayerRocket = PlayerRocket;
-        enemy.GetComponent<EnemyMovement>().PlayerRocket = PlayerRocket;
-        enemy.GetComponent<EnemyInteractions>().PlayerRocket = PlayerRocket;
-        enemy.Rocket.OnRocketDestroyed += OnEnemyDestroyed;
-    }
-    private void OnEnemyDestroyed(Rocket enemy)
-    {
-        SpawnTimer = spawnfrequency;
-        currentEnemiesCount -= 1;
-        Debug.Log($"currentEnemiesCount = {currentEnemiesCount}");
-    }
-    private void OnPoolExpanded(RocketBuilder enemy)
-    {
-        InitializeEnemyRocket(enemy);
+
+        public void Spawn()
+        {
+            if ((SpawnTimer <= 0) && (_currentEnemiesCount < _maxEnemiesCount))
+            {
+                var spawnedEnemy = Pool.GetFreeElement();
+                OnSpawned?.Invoke(spawnedEnemy);
+
+                spawnedEnemy.RocketModel.OnRocketDestroyed += OnEnemyDestroyed;
+
+                SpawnTimer = _spawnFrequency;
+                _currentEnemiesCount++;
+            }
+
+            CountDown();
+        }
+
+        public void CountDown()
+        {
+            if (SpawnTimer >= 0)
+            {
+                SpawnTimer -= Time.deltaTime;
+            }
+        }
+
+        private void OnEnemyDestroyed(bool byPlayer)
+        {
+            SpawnTimer = _spawnFrequency;
+            _currentEnemiesCount -= 1;
+            Debug.Log($"currentEnemiesCount = {_currentEnemiesCount}");
+        }
     }
 }

@@ -1,47 +1,63 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Meteor;
 using UnityEngine;
-class MeteorSpawner : MonoBehaviour, ISpawner<MeteorBuilder>
+using Utils;
+using Random = UnityEngine.Random;
+
+namespace Spawners
 {
-    [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private MeteorBuilder meteorPrefab;
-    [SerializeField] private float spawnfrequency;
-    [SerializeField] private int poolCount;
-    public Pool<MeteorBuilder> Pool { get ; set ; }
-    public RocketBuilder PlayerRocket { set; get; }
-    public float SpawnTimer { get; set; }
-    private void Update()
+    public class MeteorSpawner : MonoBehaviour, ISpawner<MeteorInitializer>
     {
-        Spawn();
-    }
-    public void InitializeSpawner(RocketBuilder playerRocket)
-    {
-        this.PlayerRocket = playerRocket;
-        Pool = new Pool<MeteorBuilder>(meteorPrefab, poolCount, transform);
-        foreach (var meteor in Pool.PrefabsPool)
+        public event Action<MeteorInitializer> OnSpawned;
+
+        [SerializeField] private Transform[] _spawnPoints;
+        [SerializeField] private MeteorInitializer _meteorPrefab;
+        [SerializeField] private float _spawnFrequency;
+        [SerializeField] private int _poolCount;
+
+        public Pool<MeteorInitializer> Pool { get; set; }
+        public float SpawnTimer { get; set; }
+
+        private void Start()
         {
-            meteor.GetComponent<MeteorInteractions>().PlayerRocket = this.PlayerRocket;
+            SpawnTimer = _spawnFrequency;
         }
-        Pool.AutoExpand = true;
-    }
-    public void Spawn()
-    {
-        int spawnPointIndex = UnityEngine.Random.Range(0,spawnPoints.Length);
-        if (SpawnTimer <= 0)
+
+        private void Update()
         {
-            SpawnTimer = spawnfrequency;
-            Pool.GetFreeElement(spawnPoints[spawnPointIndex].position).InitializeMeteor();
+            Spawn();
         }
-        CountDown();
-    }
-    public void CountDown()
-    {
-        if (SpawnTimer >= 0)
+
+        public void InitializeSpawner()
         {
-            SpawnTimer = SpawnTimer - Time.deltaTime;
+            Pool = new Pool<MeteorInitializer>(_meteorPrefab, _poolCount, transform)
+            {
+                AutoExpand = true
+            };
+        }
+
+        public void Spawn()
+        {
+            int spawnPointIndex = Random.Range(0, _spawnPoints.Length);
+
+            if (SpawnTimer <= 0)
+            {
+                var spawnedMeteor = Pool.GetFreeElement(_spawnPoints[spawnPointIndex].position);
+                spawnedMeteor.InitializeMeteor();
+                OnSpawned?.Invoke(spawnedMeteor);
+
+                SpawnTimer = _spawnFrequency;
+            }
+
+            CountDown();
+        }
+
+        public void CountDown()
+        {
+            if (SpawnTimer >= 0)
+            {
+                SpawnTimer -= Time.deltaTime;
+            }
         }
     }
 }
