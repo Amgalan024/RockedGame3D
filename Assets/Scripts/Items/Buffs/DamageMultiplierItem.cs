@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Items
 {
-    public class DamageMultiplierItem : InteractableItem
+    public class DamageMultiplierItem : ItemBase
     {
         [SerializeField] private float _duration;
         [SerializeField] private int _damageMultiplier;

@@ -6,18 +6,18 @@ using Random = UnityEngine.Random;
 
 namespace Spawners
 {
-    public class ItemSpawner : MonoBehaviour, ISpawner<InteractableItem>
+    public class ItemSpawner : MonoBehaviour, ISpawner<ItemBase>
     {
-        public event Action<InteractableItem> OnSpawned;
+        public event Action<ItemBase> OnSpawned;
 
         [SerializeField] private Transform[] _spawnPoints;
-        [SerializeField] private InteractableItem _itemPrefab;
+        [SerializeField] private ItemBase _itemBasePrefab;
         [SerializeField] private float _spawnFrequency;
         [SerializeField] private int _poolCount;
         [SerializeField] private int _spawnChance;
 
         public float SpawnTimer { get; set; }
-        public Pool<InteractableItem> Pool { get; set; }
+        public Pool<ItemBase> Pool { get; set; }
 
         private void Start()
         {
@@ -31,7 +31,7 @@ namespace Spawners
 
         public void InitializeSpawner()
         {
-            Pool = new Pool<InteractableItem>(_itemPrefab, _poolCount, transform)
+            Pool = new Pool<ItemBase>(_itemBasePrefab, _poolCount, transform)
             {
                 AutoExpand = true
             };

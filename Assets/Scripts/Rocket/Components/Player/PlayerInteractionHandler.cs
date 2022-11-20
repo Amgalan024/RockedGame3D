@@ -1,46 +1,37 @@
-﻿using Core;
-using Meteor.Models;
+﻿using System;
+using Core;
+using Rocket.Components.Player.InteractionHandlers;
 using Rocket.Models;
 using UnityEngine;
 
 namespace Rocket.Components.Player
 {
-    public class PlayerInteractionHandler : MonoBehaviour, IPlayerComponent, IInteractable<MeteorModel>
+    public class PlayerInteractionHandler : MonoBehaviour, IPlayerComponent, ICollisionEnterHandler,
+        ITriggerEnterHandler
     {
         public PlayerModel PlayerModel { get; set; }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            var rocketInteractable = collision.gameObject.GetComponent<IInteractable<RocketModel>>();
-            rocketInteractable.Interact(PlayerModel.RocketModel);
-
-            var interactable = collision.gameObject.GetComponent<IInteractable<PlayerModel>>();
-            interactable?.Interact(PlayerModel);
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            var rocketInteractable = other.gameObject.GetComponent<IInteractable<RocketModel>>();
-            rocketInteractable.Interact(PlayerModel.RocketModel);
-
-            var interactable = other.gameObject.GetComponent<IInteractable<PlayerModel>>();
-            interactable?.Interact(PlayerModel);
-        }
+        public IInteractionVisitor CollisionEnterVisitor { get; set; }
+        public IInteractionVisitor TriggerEnterVisitor { get; set; }
 
         public void InitializeComponent(PlayerModel playerModel)
         {
             PlayerModel = playerModel;
+            CollisionEnterVisitor = new PlayerCollisionEnterVisitor(PlayerModel);
+            TriggerEnterVisitor = new PlayerTriggerEnterVisitor(PlayerModel);
         }
 
-        private void OnPlayerDied(bool byPlayer)
+        private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log($"Player Died");
-            gameObject.SetActive(false);
+            var collisionEnterHandler = collision.gameObject.GetComponent<ICollisionEnterHandler>();
+
+            collisionEnterHandler.CollisionEnterVisitor.Visit(this);
         }
 
-        public void Interact(MeteorModel meteorModel)
+        private void OnTriggerEnter(Collider other)
         {
-            meteorModel.DestroyMeteor();
+            var triggerEnterHandler = other.gameObject.GetComponent<ITriggerEnterHandler>();
+
+            triggerEnterHandler.TriggerEnterVisitor.Visit(this);
         }
     }
 }

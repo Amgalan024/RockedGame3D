@@ -27,7 +27,7 @@ namespace Rocket.Components.Enemy
 
         private void OnTriggerEnter(Collider collision)
         {
-            if (collision.GetComponent<SideBorder>())
+            if (collision.GetComponent<SideBorderInteractionHandler>())
             {
                 _moveRight = !_moveRight;
             }

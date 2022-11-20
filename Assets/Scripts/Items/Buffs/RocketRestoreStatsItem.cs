@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Items
 {
-    public class RocketRestoreStatsItem : InteractableItem
+    public class RocketRestoreStatsItem : ItemBase
     {
         [SerializeField] private int _restoreHealthPoints;
         [SerializeField] private int _restoreEnergyPoints;

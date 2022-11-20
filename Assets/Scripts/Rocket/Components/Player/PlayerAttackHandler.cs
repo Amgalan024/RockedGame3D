@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Rocket.Components.Player
 {
-    public class PlayerAttack : MonoBehaviour, IRocketComponent
+    public class PlayerAttackHandler : MonoBehaviour, IRocketComponent
     {
         private IRocketAttackStrategy _rocketAttackStrategy;
         public RocketModel RocketModel { get; set; }
@@ -28,7 +28,7 @@ namespace Rocket.Components.Player
 
         public void InitializeComponent(RocketModel rocketModel)
         {
-            this.RocketModel = rocketModel;
+            RocketModel = rocketModel;
         }
     }
 }
