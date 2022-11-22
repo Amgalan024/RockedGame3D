@@ -3,11 +3,12 @@ using UnityEngine;
 
 namespace Rocket.Components.Player
 {
-    public class PlayerMovementStrategy : MonoBehaviour, IRocketMovementStrategy
+    public class PlayerMovementStrategy : MonoBehaviour, IRocketMovementStrategy, IPlayerComponent
     {
-        public RocketModel RocketModel { get; set; }
+        public PlayerModel PlayerModel { get; set; }
 
         private Rigidbody _rigidbody;
+
         private float _verticalInput;
         private float _horizontalInput;
 
@@ -21,16 +22,17 @@ namespace Rocket.Components.Player
             Movement();
         }
 
-        public void InitializeComponent(RocketModel component)
+        public void InitializeComponent(PlayerModel playerModel)
         {
-            RocketModel = component;
+            PlayerModel = playerModel;
         }
 
         public void Movement()
         {
             _verticalInput = Input.GetAxis("Vertical");
             _horizontalInput = Input.GetAxis("Horizontal");
-            _rigidbody.velocity = new Vector3(RocketModel.Speed * _horizontalInput, RocketModel.Speed * _verticalInput);
+            _rigidbody.velocity = new Vector3(PlayerModel.RocketModel.Speed * _horizontalInput,
+                PlayerModel.RocketModel.Speed * _verticalInput);
         }
     }
 }

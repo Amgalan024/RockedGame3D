@@ -84,14 +84,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 586f9879c8cf47fe9f05e77fcdab6bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthPoints: 0
-  _energyPoints: 0
-  _damage: 0
-  _speed: 0
-  _projectileSpeed: 0
-  _attackSpeed: 0
-  _startAmmo: 0
-  _reward: 0
+  _healthPoints: 100
+  _energyPoints: 10
+  _damage: 10
+  _speed: 30
+  _projectileSpeed: -50
+  _attackSpeed: 2
+  _startAmmo: 100
+  _reward: 500
 --- !u!114 &134561364106653108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,6 +294,10 @@ PrefabInstance:
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 1345121823037428602, guid: 875869f6caecef349989366730b36cb2, type: 3}
+    - target: {fileID: 1245934087736483422, guid: f9c866956b8c53249802650a6cdf925a, type: 3}
+      propertyPath: _projectilePrefab
+      value: 
+      objectReference: {fileID: 211781979218244260, guid: 875869f6caecef349989366730b36cb2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9c866956b8c53249802650a6cdf925a, type: 3}
 --- !u!4 &294267938905608715 stripped

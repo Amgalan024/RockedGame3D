@@ -1,16 +1,16 @@
 ﻿using Core.InteractionHandle.Visitors;
-using Meteor.Components.InteractionVisitors;
-using Meteor.Models;
+using Rocket.Components.InteractionHandlers;
+using Rocket.Models;
 using UnityEngine;
 
-namespace Meteor.Components
+namespace Rocket.Components.Projectile
 {
-    public class MeteorInteractionHandler : MonoBehaviour, IMeteorComponent, ICollisionEnterVisitor,
-        ITriggerEnterVisitor
+    public class ProjectileInteractionHandler : MonoBehaviour, IRocketComponent, ICollisionEnterVisitor
     {
-        public MeteorModel MeteorModel { get; set; }
+        [SerializeField] private GameObject _projectile;
+
+        public RocketModel RocketModel { get; set; }
         public IInteractionVisitor CollisionEnterVisitor { get; set; }
-        public IInteractionVisitor TriggerEnterVisitor { get; set; }
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -26,11 +26,10 @@ namespace Meteor.Components
             triggerEnterHandler?.TriggerEnterVisitor.Visit(this);
         }
 
-        public void InitializeComponent(MeteorModel meteorModel)
+        public void InitializeComponent(RocketModel rocketModel)
         {
-            MeteorModel = meteorModel;
-            CollisionEnterVisitor = new MeteorCollisionEnterVisitor(MeteorModel);
-            TriggerEnterVisitor = new MeteorTriggerEnterVisitor(MeteorModel);
+            RocketModel = rocketModel;
+            CollisionEnterVisitor = new ProjectileCollisionEnterVisitor(_projectile);
         }
     }
 }

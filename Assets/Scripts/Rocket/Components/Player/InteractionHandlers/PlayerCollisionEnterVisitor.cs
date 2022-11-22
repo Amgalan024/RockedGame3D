@@ -1,5 +1,6 @@
-﻿using Core;
+﻿using Core.InteractionHandle.Visitors;
 using Meteor.Components;
+using Rocket.Components.Projectile;
 using Rocket.Models;
 
 namespace Rocket.Components.Player.InteractionHandlers
@@ -19,10 +20,10 @@ namespace Rocket.Components.Player.InteractionHandlers
             _playerModel.RocketModel.TakeDamage(meteorInteractionHandler.MeteorModel.Damage);
         }
 
-        public override void Visit(RocketProjectileInteractionHandler rocketProjectileInteractionHandler)
+        public override void Visit(ProjectileInteractionHandler projectileInteractionHandler)
         {
-            base.Visit(rocketProjectileInteractionHandler);
-            _playerModel.RocketModel.TakeDamage(rocketProjectileInteractionHandler.RocketModel.Damage);
+            base.Visit(projectileInteractionHandler);
+            _playerModel.RocketModel.TakeDamage(projectileInteractionHandler.RocketModel.Damage);
         }
     }
 }

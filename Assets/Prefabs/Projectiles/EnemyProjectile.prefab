@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 7872215403846946932}
   - component: {fileID: 5310132064691161456}
   - component: {fileID: 1345121823037428602}
+  - component: {fileID: -7636195581391071732}
+  - component: {fileID: 211781979218244260}
   m_Layer: 10
   m_Name: EnemyProjectile
   m_TagString: Untagged
@@ -126,5 +128,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb0a5a5a4fd316e4bb73d7d5d43662e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  damage: 0
+--- !u!114 &-7636195581391071732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6981359468339525648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f56cc63db954da6a990e364e34675bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _projectile: {fileID: 6981359468339525648}
+--- !u!114 &211781979218244260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6981359468339525648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9d48e445f1145b79d7c18005d236e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

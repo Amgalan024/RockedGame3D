@@ -1,4 +1,4 @@
-﻿using Core;
+﻿using Core.InteractionHandle.Visitors;
 using Rocket.Components.Player;
 
 namespace Items.InteractionHandlers

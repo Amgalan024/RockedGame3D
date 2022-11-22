@@ -10,6 +10,7 @@ namespace Spawners
     {
         public event Action<MeteorInitializer> OnSpawned;
 
+        [SerializeField] private Transform _root; 
         [SerializeField] private Transform[] _spawnPoints;
         [SerializeField] private MeteorInitializer _meteorPrefab;
         [SerializeField] private float _spawnFrequency;
@@ -30,7 +31,7 @@ namespace Spawners
 
         public void InitializeSpawner()
         {
-            Pool = new Pool<MeteorInitializer>(_meteorPrefab, _poolCount, transform)
+            Pool = new Pool<MeteorInitializer>(_meteorPrefab, _poolCount, _root)
             {
                 AutoExpand = true
             };
@@ -43,7 +44,9 @@ namespace Spawners
             if (SpawnTimer <= 0)
             {
                 var spawnedMeteor = Pool.GetFreeElement(_spawnPoints[spawnPointIndex].position);
+
                 spawnedMeteor.InitializeMeteor();
+
                 OnSpawned?.Invoke(spawnedMeteor);
 
                 SpawnTimer = _spawnFrequency;

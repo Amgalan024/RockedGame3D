@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4925599262242032097}
   - component: {fileID: 4925599262242032096}
   - component: {fileID: 4387034606691651756}
+  - component: {fileID: 2133721694693212776}
   m_Layer: 0
   m_Name: DamageBuff
   m_TagString: Untagged
@@ -109,10 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b672aa23bd0443747b3df26c4fd9e63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallSpeed: 10
-  duration: 2
-  multiplier: 2
-  ammo: 20
+  _duration: 0
+  _damageMultiplier: 0
+  _ammoAmount: 0
 --- !u!54 &4387034606691651756
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -129,3 +129,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2133721694693212776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4925599262242032103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f4b77d92a94d63bb79aa165b8a1a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,6 +1,6 @@
 ﻿namespace Rocket.Components
 {
-    public interface IRocketMovementStrategy : IRocketComponent
+    public interface IRocketMovementStrategy
     {
         void Movement();
     }

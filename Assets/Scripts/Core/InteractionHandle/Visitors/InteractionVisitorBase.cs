@@ -1,11 +1,11 @@
 ﻿using Borders;
 using Items;
 using Meteor.Components;
-using Rocket.Components;
 using Rocket.Components.Enemy;
 using Rocket.Components.Player;
+using Rocket.Components.Projectile;
 
-namespace Core
+namespace Core.InteractionHandle.Visitors
 {
     public class InteractionVisitorBase : IInteractionVisitor
     {
@@ -33,7 +33,7 @@ namespace Core
         {
         }
 
-        public virtual void Visit(RocketProjectileInteractionHandler rocketProjectileInteractionHandler)
+        public virtual void Visit(ProjectileInteractionHandler projectileInteractionHandler)
         {
         }
     }

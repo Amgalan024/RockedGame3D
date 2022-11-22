@@ -1,5 +1,6 @@
 ﻿using Core;
 using Rocket.Models;
+using UnityEngine;
 
 namespace Rocket.Components.Player
 {
@@ -7,9 +8,9 @@ namespace Rocket.Components.Player
     {
         public PlayerModel PlayerModel { get; set; }
 
-        public void InitializePlayer()
+        public void InitializePlayer(Transform projectileContainer)
         {
-            InitializeRocket();
+            InitializeRocket(projectileContainer);
 
             PlayerModel = new PlayerModel(RocketModel);
 

@@ -1,4 +1,5 @@
-﻿using Rocket.Models;
+﻿using Rocket.Components.Projectile;
+using Rocket.Models;
 using UnityEngine;
 using Utils;
 
@@ -6,43 +7,35 @@ namespace Rocket.Components
 {
     public class RocketGun : MonoBehaviour, IRocketComponent
     {
-        [SerializeField] private RocketProjectileMovement _projectilePrefab;
+        [SerializeField] private ProjectileInitializer _projectilePrefab;
 
         public RocketModel RocketModel { get; set; }
 
-        private Pool<RocketProjectileMovement> _projectilePrefabPool;
+        private Pool<ProjectileInitializer> _projectilePrefabPool;
 
         public void InitializeComponent(RocketModel rocketModel)
         {
             RocketModel = rocketModel;
-            RocketModel.OnDamageChanged += OnRocketDamageChanged;
 
             int poolCount = 10;
 
-            _projectilePrefabPool = new Pool<RocketProjectileMovement>(_projectilePrefab, poolCount, transform)
-            {
-                AutoExpand = true
-            };
-
-            foreach (var projectile in _projectilePrefabPool.PrefabsPool)
-            {
-                projectile.InitializeComponent(RocketModel);
-            }
-        }
-
-        private void OnRocketDamageChanged(int damage)
-        {
-            foreach (var projectile in _projectilePrefabPool.PrefabsPool)
-            {
-                projectile.InitializeComponent(RocketModel);
-            }
+            _projectilePrefabPool =
+                new Pool<ProjectileInitializer>(_projectilePrefab, poolCount, RocketModel.ProjectilesContainer)
+                {
+                    AutoExpand = true
+                };
         }
 
         public void ShootProjectile()
         {
             if (RocketModel.Ammo > 0)
             {
-                _projectilePrefabPool.GetFreeElement();
+                var projectile = _projectilePrefabPool.GetFreeElement();
+
+                projectile.InitializeProjectile(RocketModel);
+
+                projectile.transform.position = transform.position;
+
                 RocketModel.WasteAmmo();
             }
             else
@@ -55,7 +48,14 @@ namespace Rocket.Components
         {
             if (RocketModel.Ammo > 0)
             {
-                _projectilePrefabPool.GetFreeElement().transform.rotation = rotation;
+                var projectile = _projectilePrefabPool.GetFreeElement();
+
+                projectile.InitializeProjectile(RocketModel);
+
+                projectile.transform.rotation = rotation;
+
+                projectile.transform.position = transform.position;
+
                 RocketModel.WasteAmmo();
             }
             else

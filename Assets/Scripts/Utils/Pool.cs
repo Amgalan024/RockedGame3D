@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Utils
 {
@@ -59,6 +60,11 @@ namespace Utils
             throw new Exception($"There is no element type of {typeof(T)}");
         }
 
+        public void ReturnElementToPool(T element)
+        {
+            element.gameObject.SetActive(false);
+        }
+
         private void CreatePool(int count)
         {
             PrefabsPool = new List<T>();
@@ -68,23 +74,21 @@ namespace Utils
             }
         }
 
-        private T CreateObject(bool isExpandingPool, bool isActiveByDeafult = false)
+        private T CreateObject(bool isExpandingPool, bool isActiveByDefault = false)
         {
             if (isExpandingPool)
             {
-                var createdObject = UnityEngine.Object.Instantiate(PrefabsPool[0], Container.transform.position,
-                    Container.transform.rotation);
+                var createdObject = Object.Instantiate(PrefabsPool[0], Container);
                 createdObject.transform.position = Container.position;
-                createdObject.gameObject.SetActive(isActiveByDeafult);
+                createdObject.gameObject.SetActive(isActiveByDefault);
                 PrefabsPool.Add(createdObject);
                 OnPoolExpanded?.Invoke(createdObject);
                 return createdObject;
             }
             else
             {
-                var createdObject =
-                    UnityEngine.Object.Instantiate(Prefab, Container.transform.position, Container.transform.rotation);
-                createdObject.gameObject.SetActive(isActiveByDeafult);
+                var createdObject = Object.Instantiate(Prefab, Container);
+                createdObject.gameObject.SetActive(isActiveByDefault);
                 PrefabsPool.Add(createdObject);
                 return createdObject;
             }

@@ -1,13 +1,9 @@
-﻿using Core;
-using Meteor.Components;
-using Meteor.Models;
-using Rocket.Components.Player;
-using Rocket.Models;
+﻿using Rocket.Models;
 using UnityEngine;
 
-namespace Rocket.Components
+namespace Rocket.Components.Projectile
 {
-    public class RocketProjectileMovement : MonoBehaviour, IRocketComponent
+    public class ProjectileMovement : MonoBehaviour, IRocketComponent
     {
         public RocketModel RocketModel { get; set; }
 

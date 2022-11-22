@@ -16,10 +16,10 @@ namespace Rocket
 
         public RocketModel RocketModel { private set; get; }
 
-        public void InitializeRocket()
+        public void InitializeRocket(Transform projectilesContainer)
         {
             RocketModel = new RocketModel(_healthPoints, _energyPoints, _damage, _speed, _projectileSpeed, _attackSpeed,
-                _startAmmo, transform);
+                _startAmmo, transform, projectilesContainer);
 
             foreach (var component in GetComponentsInChildren<IGameEntityComponent<RocketModel>>())
             {

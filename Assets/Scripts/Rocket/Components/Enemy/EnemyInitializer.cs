@@ -10,11 +10,11 @@ namespace Rocket.Components.Enemy
 
         public EnemyModel EnemyModel { private set; get; }
 
-        public void InitializeEnemy()
+        public void InitializeEnemy(Transform projectileContainer, Transform target)
         {
-            InitializeRocket();
+            InitializeRocket(projectileContainer);
 
-            EnemyModel = new EnemyModel(_reward, RocketModel);
+            EnemyModel = new EnemyModel(_reward, RocketModel, target);
 
             foreach (var component in GetComponentsInChildren<IGameEntityComponent<EnemyModel>>())
             {

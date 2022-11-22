@@ -1,4 +1,5 @@
-﻿using Core;
+﻿using Core.InteractionHandle.Visitors;
+using Rocket.Components.Projectile;
 using Rocket.Models;
 
 namespace Rocket.Components.Enemy.InteractionHandlers
@@ -12,11 +13,11 @@ namespace Rocket.Components.Enemy.InteractionHandlers
             _enemyModel = enemyModel;
         }
 
-        public override void Visit(RocketProjectileInteractionHandler rocketProjectileInteractionHandler)
+        public override void Visit(ProjectileInteractionHandler projectileInteractionHandler)
         {
-            base.Visit(rocketProjectileInteractionHandler);
+            base.Visit(projectileInteractionHandler);
 
-            _enemyModel.RocketModel.TakeDamage(rocketProjectileInteractionHandler.RocketModel.Damage);
+            _enemyModel.RocketModel.TakeDamage(projectileInteractionHandler.RocketModel.Damage);
         }
     }
 }

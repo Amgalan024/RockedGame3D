@@ -1,4 +1,4 @@
-﻿using Core;
+﻿using Core.InteractionHandle.Visitors;
 using Meteor.Components;
 using Rocket.Components.Enemy;
 using Rocket.Components.Player;
@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace Rocket.Components.InteractionHandlers
 {
-    public class RocketCollisionEnterVisitor : InteractionVisitorBase
+    public class ProjectileCollisionEnterVisitor : InteractionVisitorBase
     {
         private readonly GameObject _projectileGameObject;
 
-        public RocketCollisionEnterVisitor(GameObject projectileGameObject)
+        public ProjectileCollisionEnterVisitor(GameObject projectileGameObject)
         {
             _projectileGameObject = projectileGameObject;
         }

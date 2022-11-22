@@ -1,6 +1,5 @@
 ﻿using System;
 using Cinemachine;
-using Rocket;
 using Rocket.Components.Player;
 using Rocket.Models;
 using Spawners;
@@ -13,6 +12,7 @@ namespace Controllers.Gameplay
         public event Action<PlayerModel> OnPlayerModelInitialized;
 
         [SerializeField] private PlayerInitializer _playerRocketPrefab;
+        [SerializeField] private Transform _playerProjectileContainer;
         [SerializeField] private Transform _playerSpawnPoint;
         [SerializeField] private EnemySpawner _enemySpawner;
         [SerializeField] private MeteorSpawner _meteorSpawner;
@@ -27,11 +27,11 @@ namespace Controllers.Gameplay
             _playerInitializer =
                 Instantiate(_playerRocketPrefab, _playerSpawnPoint.position, _playerSpawnPoint.rotation);
 
-            _playerInitializer.InitializePlayer();
+            _playerInitializer.InitializePlayer(_playerProjectileContainer);
 
             _playerStatsPanel.InitializeComponent(_playerInitializer.PlayerModel);
 
-            _enemySpawner.InitializeSpawner();
+            _enemySpawner.InitializeSpawner(_playerInitializer.PlayerModel.RocketModel.RocketTransform);
             _meteorSpawner.InitializeSpawner();
             _itemSpawner.InitializeSpawner();
 

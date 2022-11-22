@@ -22,9 +22,10 @@ namespace Rocket.Models
         public float AttackSpeed { private set; get; }
         public int Ammo { private set; get; }
         public Transform RocketTransform { get; }
+        public Transform ProjectilesContainer { get; }
 
         public RocketModel(int healthPoints, int energyPoints, int damage, float speed, float projectileSpeed,
-            float attackSpeed, int startAmmo, Transform rocketTransform)
+            float attackSpeed, int startAmmo, Transform rocketTransform, Transform projectilesContainer)
         {
             HealthPoint = healthPoints;
             MaxHealthPoint = healthPoints;
@@ -36,6 +37,7 @@ namespace Rocket.Models
             AttackSpeed = attackSpeed;
             Ammo = startAmmo;
             RocketTransform = rocketTransform;
+            ProjectilesContainer = projectilesContainer;
         }
 
         public void TakeDamage(int damage, bool byPlayer = true)

@@ -1,5 +1,5 @@
 ﻿using Borders;
-using Core;
+using Core.InteractionHandle.Visitors;
 using Meteor.Models;
 
 namespace Meteor.Components.InteractionVisitors

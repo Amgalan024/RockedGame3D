@@ -3,14 +3,13 @@ using UnityEngine;
 
 namespace Rocket.Components.Enemy
 {
-    public class EnemyAttackHandler : MonoBehaviour, IRocketComponent
+    public class EnemyAttackHandler : MonoBehaviour, IEnemyComponent
     {
-        public RocketModel RocketModel { get; set; }
-        public Transform PlayerRocketTransform { set; get; }
+        public EnemyModel EnemyModel { get; set; }
 
         private IRocketAttackStrategy _rocketAttackStrategy;
-        private float _timer;
         private Quaternion _aimRotation;
+        private float _timer;
 
         private void Awake()
         {
@@ -22,18 +21,18 @@ namespace Rocket.Components.Enemy
             Attack();
         }
 
-        public void InitializeComponent(RocketModel rocketModel)
+        public void InitializeComponent(EnemyModel enemyModel)
         {
-            RocketModel = rocketModel;
+            EnemyModel = enemyModel;
         }
 
         private void Attack()
         {
             if (_timer <= 0)
             {
-                AimAtPlayer();
+                AimAtTarget();
                 _rocketAttackStrategy.Attack(_aimRotation);
-                _timer = RocketModel.AttackSpeed;
+                _timer = EnemyModel.RocketModel.AttackSpeed;
             }
 
             if (_timer >= 0)
@@ -42,9 +41,9 @@ namespace Rocket.Components.Enemy
             }
         }
 
-        private void AimAtPlayer()
+        private void AimAtTarget()
         {
-            var playerPosition = PlayerRocketTransform.position;
+            var playerPosition = EnemyModel.Target.position;
             var enemyPosition = transform.position;
 
             float a = enemyPosition.y - playerPosition.y;

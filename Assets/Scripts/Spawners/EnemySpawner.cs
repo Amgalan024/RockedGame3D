@@ -9,13 +9,18 @@ namespace Spawners
     {
         public event Action<EnemyInitializer> OnSpawned;
 
+        [SerializeField] private Transform _root;
+        [SerializeField] private Transform _projectileContainer;
         [SerializeField] private EnemyInitializer _enemyPrefab;
         [SerializeField] private float _spawnFrequency;
         [SerializeField] private int _maxEnemiesCount;
-        [SerializeField] private int _currentEnemiesCount;
 
         public Pool<EnemyInitializer> Pool { get; set; }
         public float SpawnTimer { get; set; }
+
+        private Transform _target;
+
+        private int _currentEnemiesCount;
 
         private void Start()
         {
@@ -27,11 +32,13 @@ namespace Spawners
             Spawn();
         }
 
-        public void InitializeSpawner()
+        public void InitializeSpawner(Transform target)
         {
-            Pool = new Pool<EnemyInitializer>(_enemyPrefab, _maxEnemiesCount, transform);
+            Pool = new Pool<EnemyInitializer>(_enemyPrefab, _maxEnemiesCount, _root);
 
             Pool.AutoExpand = true;
+
+            _target = target;
         }
 
         public void Spawn()
@@ -39,9 +46,12 @@ namespace Spawners
             if ((SpawnTimer <= 0) && (_currentEnemiesCount < _maxEnemiesCount))
             {
                 var spawnedEnemy = Pool.GetFreeElement();
-                OnSpawned?.Invoke(spawnedEnemy);
 
-                spawnedEnemy.RocketModel.OnRocketDestroyed += OnEnemyDestroyed;
+                spawnedEnemy.InitializeEnemy(_projectileContainer, _target);
+
+                spawnedEnemy.EnemyModel.RocketModel.OnRocketDestroyed += OnEnemyDestroyed;
+
+                OnSpawned?.Invoke(spawnedEnemy);
 
                 SpawnTimer = _spawnFrequency;
                 _currentEnemiesCount++;

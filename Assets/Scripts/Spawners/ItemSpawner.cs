@@ -10,6 +10,7 @@ namespace Spawners
     {
         public event Action<ItemBase> OnSpawned;
 
+        [SerializeField] private Transform _root; 
         [SerializeField] private Transform[] _spawnPoints;
         [SerializeField] private ItemBase _itemBasePrefab;
         [SerializeField] private float _spawnFrequency;
@@ -31,7 +32,7 @@ namespace Spawners
 
         public void InitializeSpawner()
         {
-            Pool = new Pool<ItemBase>(_itemBasePrefab, _poolCount, transform)
+            Pool = new Pool<ItemBase>(_itemBasePrefab, _poolCount, _root)
             {
                 AutoExpand = true
             };
@@ -48,6 +49,7 @@ namespace Spawners
                     int spawnPointIndex = Random.Range(0, _spawnPoints.Length);
 
                     var spawnedItem = Pool.GetFreeElement(_spawnPoints[spawnPointIndex].position);
+
                     OnSpawned?.Invoke(spawnedItem);
 
                     SpawnTimer = _spawnFrequency;
