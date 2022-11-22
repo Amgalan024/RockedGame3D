@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 8789441963139492104}
   - component: {fileID: 1739734146036631413}
   - component: {fileID: 303442009151449868}
-  - component: {fileID: 1863625343424793937}
   - component: {fileID: 8013295583816777170}
+  - component: {fileID: 1863625343424793937}
   - component: {fileID: 2397557893504431726}
   m_Layer: 0
-  m_Name: Meteor
+  m_Name: Meteor Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,18 +115,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &1863625343424793937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1311023888147200955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee0bb795791c26a41974aec918d27816, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8013295583816777170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,9 +127,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70a5b5b01a260e94e8b54a239dc42412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 100
-  damage: 10
-  speed: 40
+  _healthPoints: 0
+  _damage: 0
+  _speed: 0
+  _reward: 0
+--- !u!114 &1863625343424793937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311023888147200955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0bb795791c26a41974aec918d27816, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2397557893504431726
 MonoBehaviour:
   m_ObjectHideFlags: 0

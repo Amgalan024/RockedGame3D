@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2205981123182586040}
   - component: {fileID: 294267938916476345}
   - component: {fileID: 294267938916476344}
-  - component: {fileID: 294267938916476343}
+  - component: {fileID: 3627716708996255070}
   - component: {fileID: 294267938916476342}
   - component: {fileID: 294267938916476346}
   - component: {fileID: 9114714500013181427}
@@ -69,7 +69,7 @@ CapsuleCollider:
   m_Height: 12.409362
   m_Direction: 1
   m_Center: {x: 0, y: 5.68, z: 0}
---- !u!114 &294267938916476343
+--- !u!114 &3627716708996255070
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -78,17 +78,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5951783363219994424}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d08f8e0503e1b6842a189fcb637f06e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 36a3d4ac601f4befa21f5bc9e824057c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 200
-  energyPoints: 100
-  damage: 50
-  speed: 60
-  projectileSpeed: 180
-  attackSpeed: 0.5
-  reward: 0
-  startAmmo: 20
+  _healthPoints: 0
+  _energyPoints: 0
+  _damage: 0
+  _speed: 0
+  _projectileSpeed: 0
+  _attackSpeed: 0
+  _startAmmo: 0
 --- !u!114 &294267938916476342
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -136,11 +136,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c64875a73b8000542b2840bccc4ae42f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints:
+  _spawnPoints:
   - {fileID: 220698716402669518}
   - {fileID: 220698716394721648}
   - {fileID: 220698716361985102}
-  itemPrefab: {fileID: 4925599262242032096, guid: b004e4012f5754d4a95c8d453b03a2fc, type: 3}
-  spawnfrequency: 2
-  poolCount: 5
-  spawnChance: 20
+  _itemBasePrefab: {fileID: 0}
+  _spawnFrequency: 0
+  _poolCount: 0
+  _spawnChance: 0

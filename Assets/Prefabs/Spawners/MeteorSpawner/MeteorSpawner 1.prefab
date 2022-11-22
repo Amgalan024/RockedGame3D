@@ -48,15 +48,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d01a705a4fe41d4ba09f1d77009dd71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints:
+  _spawnPoints:
   - {fileID: 3987974855996062796}
-  - {fileID: 3987974857443239257}
-  - {fileID: 3987974857411387528}
   - {fileID: 3987974856373641473}
+  - {fileID: 3987974857443239257}
   - {fileID: 3987974856717214945}
-  meteorPrefab: {fileID: 5664955803051840612, guid: 8d480c93379730a4eb653031f3e4f54b, type: 3}
-  spawnfrequency: 0.5
-  poolCount: 10
+  - {fileID: 3987974857411387528}
+  _meteorPrefab: {fileID: 5664955803051840612, guid: 8d480c93379730a4eb653031f3e4f54b, type: 3}
+  _spawnFrequency: 0
+  _poolCount: 0
 --- !u!1 &3987974855996062795
 GameObject:
   m_ObjectHideFlags: 0

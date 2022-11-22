@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda3233cf929b0f4d9a5ec0f2c5dc097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocketGun: {fileID: 1245934087736483422}
+  _rocketGun: {fileID: 1245934087736483422}
 --- !u!1 &1245934087736483420
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,4 +88,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0774161d866c95b4993b94a0ab963961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 1345121823037428602, guid: a59280cc730cbaf4fb040b87ad63dce6, type: 3}
+  _projectilePrefab: {fileID: 1345121823037428602, guid: a59280cc730cbaf4fb040b87ad63dce6, type: 3}

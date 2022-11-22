@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed6cc18916a1bfb40bd22953f427476c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 294267938916476343, guid: b2226a8254989604eb29c794bab3251d, type: 3}
-  spawnfrequency: 3
-  maxEnemiesCount: 3
-  currentEnemiesCount: 0
+  _enemyPrefab: {fileID: 3528510287973675284, guid: b2226a8254989604eb29c794bab3251d, type: 3}
+  _spawnFrequency: 0
+  _maxEnemiesCount: 0
+  _currentEnemiesCount: 0

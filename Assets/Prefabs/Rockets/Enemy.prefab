@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2205981123182586040}
   - component: {fileID: 294267938916476345}
   - component: {fileID: 294267938916476344}
-  - component: {fileID: 294267938916476343}
+  - component: {fileID: 3528510287973675284}
   - component: {fileID: 134561364106653108}
   - component: {fileID: 4061814707748860506}
   - component: {fileID: 4591175354060007342}
@@ -72,7 +72,7 @@ CapsuleCollider:
   m_Height: 12.409362
   m_Direction: 1
   m_Center: {x: 0, y: 5.68, z: 0}
---- !u!114 &294267938916476343
+--- !u!114 &3528510287973675284
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -81,17 +81,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5951783363219994424}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d08f8e0503e1b6842a189fcb637f06e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 586f9879c8cf47fe9f05e77fcdab6bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 100
-  energyPoints: 10
-  damage: 10
-  speed: 30
-  projectileSpeed: -50
-  attackSpeed: 2
-  reward: 500
-  startAmmo: 100
+  _healthPoints: 0
+  _energyPoints: 0
+  _damage: 0
+  _speed: 0
+  _projectileSpeed: 0
+  _attackSpeed: 0
+  _startAmmo: 0
+  _reward: 0
 --- !u!114 &134561364106653108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,8 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7670d700db47a284aaa91715404d670d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveRight: 0
-  chaseDistance: 80
+  _moveRight: 0
+  _chaseDistance: 0
 --- !u!114 &4680601844525087843
 MonoBehaviour:
   m_ObjectHideFlags: 0
