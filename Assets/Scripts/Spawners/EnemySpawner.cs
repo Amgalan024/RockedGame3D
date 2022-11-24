@@ -11,6 +11,7 @@ namespace Spawners
 
         [SerializeField] private Transform _root;
         [SerializeField] private Transform _projectileContainer;
+        [SerializeField] private Transform _spawnPoint;
         [SerializeField] private EnemyInitializer _enemyPrefab;
         [SerializeField] private float _spawnFrequency;
         [SerializeField] private int _maxEnemiesCount;
@@ -46,6 +47,8 @@ namespace Spawners
             if ((SpawnTimer <= 0) && (_currentEnemiesCount < _maxEnemiesCount))
             {
                 var spawnedEnemy = Pool.GetFreeElement();
+
+                spawnedEnemy.transform.position = _spawnPoint.position;
 
                 spawnedEnemy.InitializeEnemy(_projectileContainer, _target);
 
