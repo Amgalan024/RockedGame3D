@@ -1,18 +1,15 @@
 ﻿using Core.InteractionHandle.Visitors;
-using Items.InteractionHandlers;
 using UnityEngine;
 
 namespace Items
 {
-    public class ItemInteractionHandler : MonoBehaviour, ITriggerEnterVisitor
+    public class ItemInteractionHandler : MonoBehaviour
     {
-        public IInteractionVisitor TriggerEnterVisitor { get; set; }
+        public ItemBase Item { get; private set; }
 
         private void Awake()
         {
-            var item = GetComponent<ItemBase>();
-
-            TriggerEnterVisitor = new ItemTriggerEnterVisitor(item);
+            Item = GetComponent<ItemBase>();
         }
 
         private void OnCollisionEnter(Collision collision)

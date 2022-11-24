@@ -1,5 +1,5 @@
 ﻿using Core.InteractionHandle.Visitors;
-using Rocket.Components.InteractionHandlers;
+using Rocket.Components.Projectile.InteractionVisitors;
 using Rocket.Models;
 using UnityEngine;
 
@@ -9,8 +9,10 @@ namespace Rocket.Components.Projectile
     {
         [SerializeField] private GameObject _projectile;
 
+        public GameObject Projectile => _projectile;
+
         public RocketModel RocketModel { get; set; }
-        public IInteractionVisitor CollisionEnterVisitor { get; set; }
+        public IInteractionVisitor CollisionEnterVisitor { get; private set; }
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -29,7 +31,7 @@ namespace Rocket.Components.Projectile
         public void InitializeComponent(RocketModel rocketModel)
         {
             RocketModel = rocketModel;
-            CollisionEnterVisitor = new ProjectileCollisionEnterVisitor(_projectile);
+            CollisionEnterVisitor = new ProjectileCollisionEnterVisitor(RocketModel);
         }
     }
 }

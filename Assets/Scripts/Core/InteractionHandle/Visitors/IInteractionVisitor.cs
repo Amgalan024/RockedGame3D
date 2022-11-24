@@ -9,6 +9,7 @@ namespace Core.InteractionHandle.Visitors
 {
     public interface IInteractionVisitor
     {
+        //todo: Сделать визитеров монобехами и добавить им IGameEntityComponent что бы не создавать конструкторы и прокидывать нужные зависимости через serialized поля
         void Visit(MeteorInteractionHandler meteorInteractionHandler);
 
         void Visit(PlayerInteractionHandler playerInteractionHandler);

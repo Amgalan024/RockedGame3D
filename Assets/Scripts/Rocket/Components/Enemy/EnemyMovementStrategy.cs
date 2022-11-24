@@ -6,11 +6,11 @@ namespace Rocket.Components.Enemy
 {
     public class EnemyMovementStrategy : MonoBehaviour, IRocketMovementStrategy, IEnemyComponent
     {
-        [SerializeField] private bool _moveRight;
         [SerializeField] private float _chaseDistance;
 
         public EnemyModel EnemyModel { get; set; }
 
+        private int _sideDirection = 1;
         private Rigidbody _rigidbody;
         private Quaternion _aimRotation;
 
@@ -28,13 +28,18 @@ namespace Rocket.Components.Enemy
         {
             if (collision.GetComponent<SideBorderInteractionHandler>())
             {
-                _moveRight = !_moveRight;
+                _sideDirection *= -1;
             }
         }
 
         public void InitializeComponent(EnemyModel enemyModel)
         {
             EnemyModel = enemyModel;
+        }
+
+        public void ChangeSideDirection()
+        {
+            _sideDirection *= -1;
         }
 
         public void Movement()
@@ -47,14 +52,7 @@ namespace Rocket.Components.Enemy
             }
             else
             {
-                if (_moveRight)
-                {
-                    _rigidbody.velocity = new Vector2(EnemyModel.RocketModel.Speed, 0);
-                }
-                else
-                {
-                    _rigidbody.velocity = new Vector2(-EnemyModel.RocketModel.Speed, 0);
-                }
+                _rigidbody.velocity = new Vector2(EnemyModel.RocketModel.Speed * _sideDirection, 0);
             }
         }
 

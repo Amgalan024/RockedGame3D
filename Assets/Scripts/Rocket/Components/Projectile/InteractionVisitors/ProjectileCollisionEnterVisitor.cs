@@ -2,35 +2,38 @@
 using Meteor.Components;
 using Rocket.Components.Enemy;
 using Rocket.Components.Player;
-using UnityEngine;
+using Rocket.Models;
 
-namespace Rocket.Components.InteractionHandlers
+namespace Rocket.Components.Projectile.InteractionVisitors
 {
     public class ProjectileCollisionEnterVisitor : InteractionVisitorBase
     {
-        private readonly GameObject _projectileGameObject;
+        private readonly RocketModel _rocketModel;
 
-        public ProjectileCollisionEnterVisitor(GameObject projectileGameObject)
+        public ProjectileCollisionEnterVisitor(RocketModel rocketModel)
         {
-            _projectileGameObject = projectileGameObject;
+            _rocketModel = rocketModel;
         }
 
         public override void Visit(MeteorInteractionHandler meteorInteractionHandler)
         {
             base.Visit(meteorInteractionHandler);
-            _projectileGameObject.SetActive(false);
+
+            meteorInteractionHandler.MeteorModel.TakeDamage(_rocketModel.Damage);
         }
 
         public override void Visit(PlayerInteractionHandler playerInteractionHandler)
         {
             base.Visit(playerInteractionHandler);
-            _projectileGameObject.SetActive(false);
+
+            playerInteractionHandler.PlayerModel.RocketModel.TakeDamage(_rocketModel.Damage);
         }
 
         public override void Visit(EnemyInteractionHandler enemyInteractionHandler)
         {
             base.Visit(enemyInteractionHandler);
-            _projectileGameObject.SetActive(false);
+
+            enemyInteractionHandler.EnemyModel.RocketModel.TakeDamage(_rocketModel.Damage);
         }
     }
 }

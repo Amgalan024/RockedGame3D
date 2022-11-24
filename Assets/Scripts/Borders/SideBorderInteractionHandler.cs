@@ -1,15 +1,22 @@
-﻿using Core.InteractionHandle.Visitors;
+﻿using Borders.InteractionVisitors;
+using Core.InteractionHandle.Visitors;
 using UnityEngine;
 
 namespace Borders
 {
-    public class SideBorderInteractionHandler : MonoBehaviour
+    public class SideBorderInteractionHandler : MonoBehaviour, ITriggerEnterVisitor
     {
         [SerializeField] private SideBorderInteractionHandler _oppositeSideBorder;
         [SerializeField] private float _offset;
 
+        public IInteractionVisitor TriggerEnterVisitor { get; private set; }
         public float Offset => _offset;
         public SideBorderInteractionHandler OppositeSideBorder => _oppositeSideBorder;
+
+        private void Awake()
+        {
+            TriggerEnterVisitor = new SideBorderTriggerEnterVisitor(this);
+        }
 
         private void OnCollisionEnter(Collision collision)
         {

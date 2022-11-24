@@ -1,5 +1,5 @@
 ﻿using Core.InteractionHandle.Visitors;
-using Rocket.Components.Player.InteractionHandlers;
+using Rocket.Components.Player.InteractionVisitors;
 using Rocket.Models;
 using UnityEngine;
 
@@ -29,7 +29,7 @@ namespace Rocket.Components.Player
         public void InitializeComponent(PlayerModel playerModel)
         {
             PlayerModel = playerModel;
-            CollisionEnterVisitor = new PlayerCollisionEnterVisitor(PlayerModel);
+            CollisionEnterVisitor = new PlayerCollisionEnterVisitor();
             TriggerEnterVisitor = new PlayerTriggerEnterVisitor(PlayerModel);
         }
     }

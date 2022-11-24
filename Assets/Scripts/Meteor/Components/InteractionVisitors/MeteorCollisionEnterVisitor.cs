@@ -17,13 +17,15 @@ namespace Meteor.Components.InteractionVisitors
         public override void Visit(PlayerInteractionHandler playerInteractionHandler)
         {
             base.Visit(playerInteractionHandler);
-            _meteorModel.DestroyMeteor();
+
+            playerInteractionHandler.PlayerModel.RocketModel.TakeDamage(_meteorModel.Damage);
         }
 
         public override void Visit(ProjectileInteractionHandler projectileInteractionHandler)
         {
             base.Visit(projectileInteractionHandler);
-            _meteorModel.TakeDamage(projectileInteractionHandler.RocketModel.Damage);
+
+            projectileInteractionHandler.Projectile.SetActive(false);
         }
     }
 }

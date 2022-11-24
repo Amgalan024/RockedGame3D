@@ -5,12 +5,10 @@ using UnityEngine;
 
 namespace Meteor.Components
 {
-    public class MeteorInteractionHandler : MonoBehaviour, IMeteorComponent, ICollisionEnterVisitor,
-        ITriggerEnterVisitor
+    public class MeteorInteractionHandler : MonoBehaviour, IMeteorComponent, ICollisionEnterVisitor
     {
         public MeteorModel MeteorModel { get; set; }
         public IInteractionVisitor CollisionEnterVisitor { get; set; }
-        public IInteractionVisitor TriggerEnterVisitor { get; set; }
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -30,7 +28,6 @@ namespace Meteor.Components
         {
             MeteorModel = meteorModel;
             CollisionEnterVisitor = new MeteorCollisionEnterVisitor(MeteorModel);
-            TriggerEnterVisitor = new MeteorTriggerEnterVisitor(MeteorModel);
         }
     }
 }
