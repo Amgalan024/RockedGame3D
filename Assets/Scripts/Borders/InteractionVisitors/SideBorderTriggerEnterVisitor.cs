@@ -7,11 +7,13 @@ namespace Borders.InteractionVisitors
 {
     public class SideBorderTriggerEnterVisitor : InteractionVisitorBase
     {
-        private readonly SideBorderInteractionHandler _sideBorderInteractionHandler;
+        private readonly Transform _oppositeSideBorder;
+        private readonly float _offset;
 
-        public SideBorderTriggerEnterVisitor(SideBorderInteractionHandler sideBorderInteractionHandler)
+        public SideBorderTriggerEnterVisitor(float offset, Transform oppositeSideBorder)
         {
-            _sideBorderInteractionHandler = sideBorderInteractionHandler;
+            _offset = offset;
+            _oppositeSideBorder = oppositeSideBorder;
         }
 
         public override void Visit(EnemyInteractionHandler enemyInteractionHandler)
@@ -26,11 +28,9 @@ namespace Borders.InteractionVisitors
             base.Visit(playerInteractionHandler);
 
             var rocketTransform = playerInteractionHandler.PlayerModel.RocketModel.RocketTransform;
-            var otherSideBorderTransform = _sideBorderInteractionHandler.OppositeSideBorder.transform;
 
             rocketTransform.position =
-                new Vector2(otherSideBorderTransform.position.x + _sideBorderInteractionHandler.Offset,
-                    rocketTransform.position.y);
+                new Vector2(_oppositeSideBorder.position.x + _offset, rocketTransform.position.y);
         }
     }
 }

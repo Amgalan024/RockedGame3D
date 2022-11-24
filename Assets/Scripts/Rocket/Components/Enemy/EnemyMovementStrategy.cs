@@ -1,5 +1,4 @@
-﻿using Borders;
-using Rocket.Models;
+﻿using Rocket.Models;
 using UnityEngine;
 
 namespace Rocket.Components.Enemy
@@ -24,14 +23,6 @@ namespace Rocket.Components.Enemy
             Movement();
         }
 
-        private void OnTriggerEnter(Collider collision)
-        {
-            if (collision.GetComponent<SideBorderInteractionHandler>())
-            {
-                _sideDirection *= -1;
-            }
-        }
-
         public void InitializeComponent(EnemyModel enemyModel)
         {
             EnemyModel = enemyModel;
@@ -46,7 +37,7 @@ namespace Rocket.Components.Enemy
         {
             AimAtTarget();
 
-            if (Vector3.Distance(transform.position, EnemyModel.Target.position) >= _chaseDistance)
+            if (Mathf.Abs(transform.position.y - EnemyModel.Target.position.y) >= _chaseDistance)
             {
                 _rigidbody.velocity = new Vector2(0, -EnemyModel.RocketModel.Speed);
             }
