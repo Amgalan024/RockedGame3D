@@ -147,8 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7670d700db47a284aaa91715404d670d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveRight: 0
-  _chaseDistance: 0
+  _chaseDistance: 70
 --- !u!114 &4680601844525087843
 MonoBehaviour:
   m_ObjectHideFlags: 0
