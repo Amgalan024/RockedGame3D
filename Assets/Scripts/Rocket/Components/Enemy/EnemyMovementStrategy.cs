@@ -35,7 +35,7 @@ namespace Rocket.Components.Enemy
 
         public void Movement()
         {
-            AimAtTarget();
+            // AimAtTarget();
 
             if (Mathf.Abs(transform.position.y - EnemyModel.Target.position.y) >= _chaseDistance)
             {
