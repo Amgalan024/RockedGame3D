@@ -60,6 +60,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1245934087736483421}
   - component: {fileID: 1245934087736483422}
+  - component: {fileID: 1782448709911005487}
   m_Layer: 0
   m_Name: RocketGun
   m_TagString: Untagged
@@ -93,7 +94,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0774161d866c95b4993b94a0ab963961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectilePrefab: {fileID: 1345121823037428602, guid: 875869f6caecef349989366730b36cb2, type: 3}
+  _projectilePrefab: {fileID: 0}
+  _soundItem:
+    _identifier:
+      _groupId: 
+      _soundId: 
+    _track: 
+    _volume: 0
+    _loop: 0
+    _library: {fileID: 0}
+  _gameObject: {fileID: 0}
+--- !u!114 &1782448709911005487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245934087736483420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5c5080feb774956a7fcadf0312a9d91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SoundItem:
+    _identifier:
+      _groupId: 
+      _soundId: 
+    _track: 
+    _volume: 0
+    _loop: 0
+    _library: {fileID: 0}
 --- !u!1 &6575277262355699479
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +167,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0774161d866c95b4993b94a0ab963961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectilePrefab: {fileID: 1345121823037428602, guid: 875869f6caecef349989366730b36cb2, type: 3}
+  _projectilePrefab: {fileID: 0}
+  _soundItem:
+    _identifier:
+      _groupId: 
+      _soundId: 
+    _track: 
+    _volume: 0
+    _loop: 0
+    _library: {fileID: 0}
+  _gameObject: {fileID: 0}
 --- !u!1 &8321906976699466013
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,4 +220,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0774161d866c95b4993b94a0ab963961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectilePrefab: {fileID: 1345121823037428602, guid: 875869f6caecef349989366730b36cb2, type: 3}
+  _projectilePrefab: {fileID: 0}
+  _soundItem:
+    _identifier:
+      _groupId: 
+      _soundId: 
+    _track: 
+    _volume: 0
+    _loop: 0
+    _library: {fileID: 0}
+  _gameObject: {fileID: 0}
