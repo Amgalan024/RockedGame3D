@@ -14,9 +14,9 @@ namespace Controllers.Gameplay
         [SerializeField] private PlayerInitializer _playerRocketPrefab;
         [SerializeField] private Transform _playerProjectileContainer;
         [SerializeField] private Transform _playerSpawnPoint;
-        [SerializeField] private EnemySpawner _enemySpawner;
-        [SerializeField] private MeteorSpawner _meteorSpawner;
-        [SerializeField] private ItemSpawner _itemSpawner;
+        [SerializeField] private EnemySpawner[] _enemySpawners;
+        [SerializeField] private ItemSpawner[] _itemSpawners;
+        [SerializeField] private MeteorSpawner[] _meteorSpawners;
         [SerializeField] private PlayerStatsPanel _playerStatsPanel;
         [SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
 
@@ -31,13 +31,29 @@ namespace Controllers.Gameplay
 
             _playerStatsPanel.InitializeComponent(_playerInitializer.PlayerModel);
 
-            _enemySpawner.InitializeSpawner(_playerInitializer.PlayerModel.RocketModel.RocketTransform);
-            _meteorSpawner.InitializeSpawner();
-            _itemSpawner.InitializeSpawner();
+            InitializeSpawners();
 
             _cinemachineVirtualCamera.Follow = _playerInitializer.transform;
 
             OnPlayerModelInitialized?.Invoke(_playerInitializer.PlayerModel);
+        }
+
+        private void InitializeSpawners()
+        {
+            foreach (var spawner in _enemySpawners)
+            {
+                spawner.Initialize();
+            }
+
+            foreach (var spawner in _itemSpawners)
+            {
+                spawner.Initialize();
+            }
+
+            foreach (var spawner in _meteorSpawners)
+            {
+                spawner.Initialize();
+            }
         }
     }
 }

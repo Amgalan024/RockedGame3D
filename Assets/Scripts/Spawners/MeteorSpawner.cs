@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace Spawners
 {
-    public class MeteorSpawner : MonoBehaviour, ISpawner<MeteorInitializer>
+    public class MeteorSpawner : MonoBehaviour, ISpawnerGeneric<MeteorInitializer>
     {
         public event Action<MeteorInitializer> OnSpawned;
 
@@ -29,7 +29,7 @@ namespace Spawners
             Spawn();
         }
 
-        public void InitializeSpawner()
+        public void Initialize()
         {
             Pool = new Pool<MeteorInitializer>(_meteorPrefab, _poolCount, _root)
             {
@@ -44,8 +44,6 @@ namespace Spawners
             if (SpawnTimer <= 0)
             {
                 var spawnedMeteor = Pool.GetFreeElement(_spawnPoints[spawnPointIndex].position);
-
-                spawnedMeteor.InitializeMeteor();
 
                 OnSpawned?.Invoke(spawnedMeteor);
 

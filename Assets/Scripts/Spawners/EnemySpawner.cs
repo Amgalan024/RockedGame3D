@@ -5,12 +5,11 @@ using Utils;
 
 namespace Spawners
 {
-    public class EnemySpawner : MonoBehaviour, ISpawner<EnemyInitializer>
+    public class EnemySpawner : MonoBehaviour, ISpawnerGeneric<EnemyInitializer>
     {
         public event Action<EnemyInitializer> OnSpawned;
 
         [SerializeField] private Transform _root;
-        [SerializeField] private Transform _projectileContainer;
         [SerializeField] private Transform _spawnPoint;
         [SerializeField] private EnemyInitializer _enemyPrefab;
         [SerializeField] private float _spawnFrequency;
@@ -18,8 +17,6 @@ namespace Spawners
 
         public Pool<EnemyInitializer> Pool { get; set; }
         public float SpawnTimer { get; set; }
-
-        private Transform _target;
 
         private int _currentEnemiesCount;
 
@@ -33,13 +30,11 @@ namespace Spawners
             Spawn();
         }
 
-        public void InitializeSpawner(Transform target)
+        public void Initialize()
         {
             Pool = new Pool<EnemyInitializer>(_enemyPrefab, _maxEnemiesCount, _root);
 
             Pool.AutoExpand = true;
-
-            _target = target;
         }
 
         public void Spawn()
@@ -49,10 +44,6 @@ namespace Spawners
                 var spawnedEnemy = Pool.GetFreeElement();
 
                 spawnedEnemy.transform.position = _spawnPoint.position;
-
-                spawnedEnemy.InitializeEnemy(_projectileContainer, _target);
-
-                spawnedEnemy.EnemyModel.RocketModel.OnRocketDestroyed += OnEnemyDestroyed;
 
                 OnSpawned?.Invoke(spawnedEnemy);
 
@@ -71,11 +62,10 @@ namespace Spawners
             }
         }
 
-        private void OnEnemyDestroyed(bool byPlayer)
+        public void DecreaseEnemyCount()
         {
             SpawnTimer = _spawnFrequency;
             _currentEnemiesCount -= 1;
-            Debug.Log($"currentEnemiesCount = {_currentEnemiesCount}");
         }
     }
 }

@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace Spawners
 {
-    public class ItemSpawner : MonoBehaviour, ISpawner<ItemBase>
+    public class ItemSpawner : MonoBehaviour, ISpawnerGeneric<ItemBase>
     {
         public event Action<ItemBase> OnSpawned;
 
@@ -30,7 +30,7 @@ namespace Spawners
             Spawn();
         }
 
-        public void InitializeSpawner()
+        public void Initialize()
         {
             Pool = new Pool<ItemBase>(_itemBasePrefab, _poolCount, _root)
             {
