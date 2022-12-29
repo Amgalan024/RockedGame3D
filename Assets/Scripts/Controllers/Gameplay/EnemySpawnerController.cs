@@ -1,4 +1,5 @@
-﻿using Rocket.Components.Enemy;
+﻿using System;
+using Rocket.Components.Enemy;
 using Rocket.Models;
 using Spawners;
 using UnityEngine;
@@ -7,6 +8,7 @@ namespace Controllers.Gameplay
 {
     public class EnemySpawnerController : MonoBehaviour
     {
+        public event Action<EnemyInitializer> OnEnemyInitialized;
         [SerializeField] private GameplayEntryPoint _gameplayEntryPoint;
         [SerializeField] private EnemySpawner[] _enemySpawners;
         [SerializeField] private Transform _projectileContainer;
@@ -15,25 +17,25 @@ namespace Controllers.Gameplay
 
         public void Awake()
         {
-            _gameplayEntryPoint.OnPlayerModelInitialized += PlayerModelInitialized;
+            _gameplayEntryPoint.OnPlayerModelInitialized += SetTarget;
 
             foreach (var enemySpawner in _enemySpawners)
             {
-                void OnEnemySpawnedSubscription(EnemyInitializer enemyInitializer)
+                void OnEnemySpawned(EnemyInitializer enemyInitializer)
                 {
-                    OnEnemySpawned(enemyInitializer, enemySpawner);
+                    InitializeSpawnedEnemy(enemyInitializer, enemySpawner);
                 }
 
-                enemySpawner.OnSpawned += OnEnemySpawnedSubscription;
+                enemySpawner.OnSpawned += OnEnemySpawned;
             }
         }
 
-        private void PlayerModelInitialized(PlayerModel playerModel)
+        private void SetTarget(PlayerModel playerModel)
         {
             _target = playerModel.RocketModel.RocketTransform;
         }
 
-        private void OnEnemySpawned(EnemyInitializer enemyInitializer, EnemySpawner enemySpawner)
+        private void InitializeSpawnedEnemy(EnemyInitializer enemyInitializer, EnemySpawner enemySpawner)
         {
             enemyInitializer.InitializeEnemy(_projectileContainer, _target);
 
@@ -44,6 +46,8 @@ namespace Controllers.Gameplay
             }
 
             enemyInitializer.EnemyModel.RocketModel.OnRocketDestroyed += OnEnemyDestroyedSubscription;
+
+            OnEnemyInitialized?.Invoke(enemyInitializer);
         }
     }
 }

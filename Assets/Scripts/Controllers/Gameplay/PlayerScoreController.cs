@@ -10,7 +10,7 @@ namespace Controllers.Gameplay
     {
         [SerializeField] private GameplayEntryPoint _gameplayEntryPoint;
         [SerializeField] private MeteorSpawner _meteorSpawner;
-        [SerializeField] private EnemySpawner _enemySpawner;
+        [SerializeField] private EnemySpawnerController _enemySpawnerController;
 
         private PlayerModel _playerModel;
 
@@ -18,7 +18,7 @@ namespace Controllers.Gameplay
         {
             _gameplayEntryPoint.OnPlayerModelInitialized += OnPlayerModelInitialized;
             _meteorSpawner.OnSpawned += OnMeteorSpawned;
-            _enemySpawner.OnSpawned += OnEnemySpawned;
+            _enemySpawnerController.OnEnemyInitialized += OnEnemyInitialized;
         }
 
         private void OnPlayerModelInitialized(PlayerModel playerModel)
@@ -39,7 +39,7 @@ namespace Controllers.Gameplay
             }
         }
 
-        private void OnEnemySpawned(EnemyInitializer enemy)
+        private void OnEnemyInitialized(EnemyInitializer enemy)
         {
             enemy.RocketModel.OnRocketDestroyed += b => OnEnemyDestroyed(b, enemy.EnemyModel.Reward);
         }
