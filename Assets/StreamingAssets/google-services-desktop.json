@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "470800055237",
+    "project_id": "rocketgame-d9211",
+    "storage_bucket": "rocketgame-d9211.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:470800055237:android:4a0c7ee7d0a37c21eaa9ac",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.RockedGame3D"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "470800055237-d82q20ofg4i6cbhr8drdp1rtvpibf5pr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAo0Ig2nvsvmX5YpvCHU7tn8LXUgVJBjuA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "470800055237-d82q20ofg4i6cbhr8drdp1rtvpibf5pr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
